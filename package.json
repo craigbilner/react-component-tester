@@ -4,7 +4,9 @@
   "description": "A simple helper to make testing react components with shallow rendering easier",
   "main": "index.js",
   "scripts": {
-    "build:testrig": "NODE_ENV=PROD webpack --config ./tests/webpack.config.test.js && open ./tests/index.html"
+    "build:test": "webpack --config ./tests/webpack.config.test.js",
+    "build:testrig": "npm run build:test && open ./tests/index.html",
+    "watch:testrig": "npm run build:test -- --progress --colors --watch"
   },
   "repository": {
     "type": "git",

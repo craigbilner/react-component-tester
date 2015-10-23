@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Postcard from './components/postcard/postcard';
+import App from './components/app/app';
 
-ReactDOM.render(<Postcard />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 
