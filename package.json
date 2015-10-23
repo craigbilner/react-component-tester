@@ -4,7 +4,7 @@
   "description": "A simple helper to make testing react components with shallow rendering easier",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "build:testrig": "NODE_ENV=PROD webpack --config ./tests/webpack.config.test.js && open ./tests/index.html"
   },
   "repository": {
     "type": "git",
@@ -21,5 +21,15 @@
   "bugs": {
     "url": "https://github.com/craigbilner/react-component-tester/issues"
   },
-  "homepage": "https://github.com/craigbilner/react-component-tester#readme"
+  "homepage": "https://github.com/craigbilner/react-component-tester#readme",
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "babel-core": "^5.8.25",
+    "babel-loader": "^5.3.2",
+    "webpack": "^1.12.2"
+  },
+  "dependencies": {
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0"
+  }
 }
