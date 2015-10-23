@@ -1,0 +1,25 @@
+{
+  "name": "react-component-tester",
+  "version": "0.0.1",
+  "description": "A simple helper to make testing react components with shallow rendering easier",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/craigbilner/react-component-tester.git"
+  },
+  "keywords": [
+    "react",
+    "testing",
+    "shallow",
+    "rendering"
+  ],
+  "author": "Craig Bilner",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/craigbilner/react-component-tester/issues"
+  },
+  "homepage": "https://github.com/craigbilner/react-component-tester#readme"
+}
