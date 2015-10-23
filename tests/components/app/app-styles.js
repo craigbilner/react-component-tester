@@ -4,7 +4,10 @@ export default {
     flexFlow: 'row'
   },
   gutter: {
-    flex: 1
+    flex: 0,
+    '@media (min-width: 400px)': {
+      flex: 1
+    }
   },
   body: {
     flex: 3,

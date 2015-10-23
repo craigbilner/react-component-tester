@@ -1,4 +1,5 @@
 import React from 'react';
+import Radium from 'radium';
 import styles from './app-styles';
 import Postcard from '../postcard/postcard';
 
@@ -18,7 +19,7 @@ const address = [
   'ID8 9JD'
 ];
 
-export default props => (
+export default Radium(props => (
   <div style={styles.comp}>
     <div style={styles.gutter}></div>
     <div style={styles.body}>
@@ -34,4 +35,4 @@ export default props => (
     </div>
     <div style={styles.gutter}></div>
   </div>
-);
+));

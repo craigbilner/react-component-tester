@@ -1,7 +1,11 @@
 export default {
   comp: {
-    fontSize: '2rem',
+    fontSize: '1.5rem',
     transform: 'rotate(-30deg)',
-    marginRight: '2rem'
+    transformOrigin: 'right',
+    margin: '0 2rem 2rem 0',
+    '@media (min-width: 1200px)': {
+      fontSize: '2rem'
+    }
   }
 };
