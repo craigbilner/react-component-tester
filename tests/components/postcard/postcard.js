@@ -6,21 +6,31 @@ import Signature from '../signature/signature';
 import Stamp from '../stamp/stamp';
 import Address from '../address/address';
 
-export default props => (
+export default ({comingFrom, message, signature, address, addressee}) => (
   <div style={styles.comp}>
     <div style={styles.left}>
-      <Welcome />
-      <Message />
-      <Signature />
+      <Welcome
+        text={comingFrom}
+        />
+      <Message
+        text={message}
+        />
+
+      <div style={styles.signatureContainer}>
+        <Signature
+          text={signature}
+          />
+      </div>
     </div>
     <div style={styles.right}>
       <div style={styles.head}>
-        <div style={styles.stampContainer}>
-          <Stamp />
-        </div>
+        <Stamp />
       </div>
       <div style={styles.body}>
-        <Address />
+        <Address
+          addressee={addressee}
+          address={address}
+          />
       </div>
     </div>
   </div>

@@ -1,5 +1,8 @@
 import React from 'react';
+import styles from './message-styles';
 
-export default props => (
-  <div>Some message that someone wrote</div>
+export default ({text}) => (
+  <div style={styles.comp}>
+    {text}
+  </div>
 );
