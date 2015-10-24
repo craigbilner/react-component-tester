@@ -10,6 +10,13 @@ import TestUtils from 'react-addons-test-utils';
 const flavourInit = function ({instance}) {
   this.childMap =
     this.convertAndReduce(instance.children);
+  this.typeMap =
+    Object
+      .keys(this.childMap)
+      .reduce(
+      this.reduceTypes.bind(null, this.childMap),
+      new Map()
+    );
 };
 
 const convertAndReduce = function (children, parentIndx) {
@@ -23,49 +30,61 @@ const convertAndReduce = function (children, parentIndx) {
 };
 
 const reduceChildren =
-    function (parentIndx, childMap, child, indx) {
-      const childIsElement = TestUtils.isElement(child);
+  function (parentIndx, childMap, child, indx) {
+    const childIsElement = TestUtils.isElement(child);
 
-      if (childIsElement) {
-        const id = parentIndx ? parentIndx + '.' + indx : indx;
-        childMap[id] = {
-          type: child.type,
-          style: child.props.style
-        };
+    if (childIsElement) {
+      const id = parentIndx ? parentIndx + '.' + indx : indx;
+      childMap[id] = {
+        type: child.type,
+        style: child.props.style
+      };
 
-        if (TestUtils.isElement(child.props.children)) {
-          _.assign(
-            childMap,
-            this.convertAndReduce(
-              child.props.children,
-              id
-            )
-          );
-        } else if (child.props.children) {
-          const soloId = id + '.0';
-          childMap[soloId] = {
-            value: child.props.children
-          };
-        }
-      }
-      else {
-        childMap[indx] = {
-          value: child
-        };
-      }
-
-      return childMap;
+      _.assign(
+        childMap,
+        this.convertAndReduce(
+          child.props.children,
+          id
+        )
+      );
     }
-  ;
+    else {
+      childMap[indx] = {
+        value: child
+      };
+    }
+
+    return childMap;
+  };
+
+const reduceTypes = function (childMap, typeMap, key) {
+  const components =
+    [...(typeMap.get(childMap[key].type) || []).slice(0), childMap[key]];
+
+  typeMap.set(childMap[key].type, components);
+
+  return typeMap;
+};
 
 const findChild = function (path) {
   return this.childMap[path];
 };
 
+const findComponents = function (component) {
+  return this.typeMap.get(component);
+};
+
+const countComponents = function (component) {
+  return this.findComponents(component).length;
+};
+
 const flavourMethods = {
   convertAndReduce,
   reduceChildren,
-  findChild
+  reduceTypes,
+  findChild,
+  findComponents,
+  countComponents
 };
 
 const flavour = stampit()

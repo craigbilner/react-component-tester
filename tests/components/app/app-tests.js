@@ -1,5 +1,6 @@
 import assert from 'assert';
 import App from './app';
+import Postcard from '../postcard/postcard';
 import ReactTester from '../../../src/index';
 
 const tester = ReactTester.use(App);
@@ -50,6 +51,17 @@ describe('app should', () => {
         flex: 1
       }
     };
+
+    assert.deepEqual(actual, expected);
+  });
+
+  it('render a Postcard component', () => {
+    const actual =
+      tester
+        .flavours
+        .get(flavours.NONE)
+        .countComponents(Postcard);
+    const expected = 1;
 
     assert.deepEqual(actual, expected);
   });
