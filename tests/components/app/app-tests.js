@@ -3,7 +3,7 @@ import App from './app';
 import Postcard from '../postcard/postcard';
 import ReactTester from '../../../src/index';
 
-const tester = ReactTester.use(App);
+const tester = ReactTester.create().use(App);
 const flavours = {
   NONE: 1,
   WITH_SIGNATURE: 2,

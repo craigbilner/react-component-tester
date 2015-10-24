@@ -18,6 +18,9 @@ const flavourInit = function ({instance}) {
       this.reduceTypes.bind(null, this.childMap),
       new Map()
     );
+
+  // console.log('childMap', this.childMap);
+  // console.log('typeMap', this.typeMap);
 };
 
 const convertAndReduce = function (children, parentIndx) {
@@ -142,4 +145,4 @@ const ReactTester =
     .init(testerInit)
     .methods(testerMethods);
 
-export default ReactTester.create();
+export default ReactTester;
