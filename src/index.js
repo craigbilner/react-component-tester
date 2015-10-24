@@ -38,7 +38,7 @@ const reduceChildren =
     const childIsElement = TestUtils.isElement(child);
 
     if (childIsElement) {
-      const id = parentIndx ? parentIndx + '.' + indx : indx;
+      const id = parentIndx >= 0 ? parentIndx + '.' + indx : indx;
       childMap[id] = {
         type: child.type,
         style: child.props.style || {},
@@ -76,7 +76,7 @@ const findChild = function (path) {
 };
 
 const findComponents = function (component) {
-  return this.typeMap.get(component);
+  return this.typeMap.get(component) || [];
 };
 
 const countComponents = function (component) {
