@@ -21,7 +21,7 @@ tester.addFlavour(flavours.FIVE_LINES, {
   address: ['line 51', 'line 52', 'line 53', 'Line 54', 'Line 55']
 });
 
-describe('Address should', () => {
+describe('address should', () => {
   it('render the addressee as the first line if there is no address', () => {
     const addressee =
       tester
