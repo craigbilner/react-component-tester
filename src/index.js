@@ -10,6 +10,7 @@ import TestUtils from 'react-addons-test-utils';
 const flavourInit = function ({instance}) {
   this.childMap =
     this.convertAndReduce(instance.children);
+
   this.typeMap =
     Object
       .keys(this.childMap)
@@ -37,7 +38,8 @@ const reduceChildren =
       const id = parentIndx ? parentIndx + '.' + indx : indx;
       childMap[id] = {
         type: child.type,
-        style: child.props.style
+        style: child.props.style || {},
+        props: _.omit(child.props, 'style', 'children', '_radiumDidResolveStyles')
       };
 
       _.assign(

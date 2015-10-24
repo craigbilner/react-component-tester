@@ -9,9 +9,26 @@ const flavours = {
   WITH_SIGNATURE: 2,
   NO_SIGNATURE: 3
 };
-tester.addFlavour(flavours.NONE, {});
-// tester.addFlavour(flavours.WITH_SIGNATURE, {});
-// tester.addFlavour(flavours.NO_SIGNATURE, {});
+tester.addFlavour(flavours.NONE, {
+  comingFrom: 'Some random place',
+  message: 'Some random message',
+  signature: 'Joe Bloggs',
+  addressee: 'Mrs Random Person',
+  address: ['line 1', 'line 2']
+});
+tester.addFlavour(flavours.WITH_SIGNATURE, {
+  comingFrom: 'Some random place',
+  message: 'Some random message',
+  signature: 'Joe Bloggs',
+  addressee: 'Mrs Random Person',
+  address: ['line 1', 'line 2']
+});
+tester.addFlavour(flavours.NO_SIGNATURE, {
+  comingFrom: 'Some random place',
+  message: 'Some random message',
+  addressee: 'Mrs Random Person',
+  address: ['line 1', 'line 2']
+});
 
 describe('app should', () => {
   it('render as a div', () => {
@@ -62,6 +79,33 @@ describe('app should', () => {
         .get(flavours.NONE)
         .countComponents(Postcard);
     const expected = 1;
+
+    assert.deepEqual(actual, expected);
+  });
+
+  it('render the Postcard component with the given signature', () => {
+    const actual =
+      tester
+        .flavours
+        .get(flavours.WITH_SIGNATURE)
+        .findComponents(Postcard)[0]
+        .props
+        .signature;
+    const expected = 'Joe Bloggs';
+
+    assert.deepEqual(actual, expected);
+  });
+
+  it('render the Postcard component with no signature if one is not given', () => {
+    const signature =
+      tester
+        .flavours
+        .get(flavours.NO_SIGNATURE)
+        .findComponents(Postcard)[0]
+        .props
+        .signature;
+    const actual = typeof signature;
+    const expected = 'undefined';
 
     assert.deepEqual(actual, expected);
   });
