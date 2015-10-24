@@ -8,7 +8,7 @@
     "build:testrig": "npm run build:test && open ./tests/index.html",
     "watch:testrig": "npm run build:test -- --progress --colors --watch",
     "test": "mocha ./tests/**/*tests.js --compilers js:babel/register",
-    "test:spec": "mocha ./tests/components/address/address-tests.js --compilers js:babel/register"
+    "test:spec": "mocha ./tests/components/message/message-tests.js --compilers js:babel/register"
   },
   "repository": {
     "type": "git",
