@@ -31,6 +31,19 @@ describe('postcard should', () => {
     assert.deepEqual(actual, expected);
   });
 
+  it('give comingFrom to the welcome component', () => {
+    const actual =
+      tester
+        .flavours
+        .get(flavours.STANDARD)
+        .findComponents(Welcome)[0]
+        .props
+        .text;
+    const expected = 'some place';
+
+    assert.deepEqual(actual, expected);
+  });
+
   it('render a message component', () => {
     const actual =
       tester
@@ -42,6 +55,19 @@ describe('postcard should', () => {
     assert.deepEqual(actual, expected);
   });
 
+  it('give message to the message component', () => {
+    const actual =
+      tester
+        .flavours
+        .get(flavours.STANDARD)
+        .findComponents(Message)[0]
+        .props
+        .text;
+    const expected = 'some message';
+
+    assert.deepEqual(actual, expected);
+  });
+
   it('render a signature component', () => {
     const actual =
       tester
@@ -49,6 +75,19 @@ describe('postcard should', () => {
         .get(flavours.STANDARD)
         .countComponents(Signature);
     const expected = 1;
+
+    assert.deepEqual(actual, expected);
+  });
+
+  it('give signature to the signature component', () => {
+    const actual =
+      tester
+        .flavours
+        .get(flavours.STANDARD)
+        .findComponents(Signature)[0]
+        .props
+        .text;
+    const expected = 'some signature';
 
     assert.deepEqual(actual, expected);
   });
@@ -71,6 +110,32 @@ describe('postcard should', () => {
         .get(flavours.STANDARD)
         .countComponents(Address);
     const expected = 1;
+
+    assert.deepEqual(actual, expected);
+  });
+
+  it('give addressee to the address component', () => {
+    const actual =
+      tester
+        .flavours
+        .get(flavours.STANDARD)
+        .findComponents(Address)[0]
+        .props
+        .addressee;
+    const expected = 'some name';
+
+    assert.deepEqual(actual, expected);
+  });
+
+  it('give address to the address component', () => {
+    const actual =
+      tester
+        .flavours
+        .get(flavours.STANDARD)
+        .findComponents(Address)[0]
+        .props
+        .address;
+    const expected = ['line 1', 'postcode'];
 
     assert.deepEqual(actual, expected);
   });
