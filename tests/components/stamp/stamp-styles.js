@@ -5,6 +5,7 @@ export default {
     height: '5rem',
     border: '1px solid black',
     padding: '0.75rem',
-    boxSizing: 'border-box'
+    boxSizing: 'border-box',
+    cursor: 'pointer'
   }
 };

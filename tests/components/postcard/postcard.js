@@ -4,7 +4,7 @@ import styles from './postcard-styles';
 import Welcome from '../welcome/welcome';
 import Message from '../message/message';
 import Signature from '../signature/signature';
-import Stamp from '../stamp/stamp';
+import Stamp from '../stamp/stamp-smart';
 import Address from '../address/address';
 
 export default Radium(({comingFrom, message, signature, address, addressee}) => (
