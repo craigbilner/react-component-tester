@@ -5,6 +5,11 @@ import ReactTester from '../../../src/index';
 
 const tester = ReactTester.create().use(Stamp);
 const NONE = tester.addFlavour('NONE', {});
+const SECOND_CLASS = tester.addFlavour('SECOND_CLASS', {
+  state: {
+    type: stampTypes.SECOND_CLASS
+  }
+});
 
 describe('smart stamp should', () => {
 
@@ -20,6 +25,17 @@ describe('smart stamp should', () => {
         .type;
 
     const expected = stampTypes.NONE;
+
+    assert.deepEqual(actual, expected);
+  });
+
+  it('pass the stamp type from state to the stamp', () => {
+    const actual =
+      SECOND_CLASS
+        .component
+        .props
+        .type;
+    const expected = stampTypes.SECOND_CLASS;
 
     assert.deepEqual(actual, expected);
   });

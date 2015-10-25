@@ -6,9 +6,9 @@ export default class StampSmartComponent extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      type: stampTypes.NONE
-    };
+    this.state = props.state || {
+        type: stampTypes.NONE
+      };
   }
 
   getNextStampType(types, currentType) {
