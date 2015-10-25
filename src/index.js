@@ -46,13 +46,13 @@ const flavourInit = function ({instance}) {
   this.component = flavourComponent(_.assign({}, output, {reactClass: instance.reactClass}));
 
   this.childMap =
-    this.convertAndReduce(output.props.children);
+    convertAndReduce(output.props.children);
 
   this.typeMap =
     Object
       .keys(this.childMap)
       .reduce(
-      this.reduceTypes.bind(null, this.childMap),
+      reduceTypes.bind(null, this.childMap),
       new Map()
     );
 
@@ -73,7 +73,7 @@ const convertAndReduce = function (children, parentIndx) {
     .Children
     .toArray(children)
     .reduce(
-    this.reduceChildren.bind(this, parentIndx),
+    reduceChildren.bind(this, parentIndx),
     {}
   );
 };
@@ -88,7 +88,7 @@ const reduceChildren =
 
       _.assign(
         childMap,
-        this.convertAndReduce(
+        convertAndReduce(
           child.props.children,
           id
         )
@@ -105,7 +105,7 @@ const reduceChildren =
 
 const reduceTypes = function (childMap, typeMap, key) {
   const components =
-    [...(typeMap.get(childMap[key].type) || []).slice(0), childMap[key]];
+    [...(typeMap.get(childMap[key].type) || []), childMap[key]];
 
   typeMap.set(childMap[key].type, components);
 
@@ -127,9 +127,6 @@ const countComponents = function (component) {
 const flavourMethods = {
   getState,
   resetState,
-  convertAndReduce,
-  reduceChildren,
-  reduceTypes,
   findChild,
   findComponents,
   countComponents
@@ -179,17 +176,15 @@ const getShallowRenderer = function (component, props) {
 };
 
 const addFlavour = function (name, props) {
-  return this.createFlavour(
+  return createFlavour(
     name,
     this.ComponentToUse,
-    this.getShallowRenderer(this.ComponentToUse, props)
+    getShallowRenderer(this.ComponentToUse, props)
   );
 };
 
 const testerMethods = {
   use,
-  getShallowRenderer,
-  createFlavour,
   addFlavour
 };
 
