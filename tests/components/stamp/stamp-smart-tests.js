@@ -7,6 +7,11 @@ const tester = ReactTester.create().use(Stamp);
 const NONE = tester.addFlavour('NONE', {});
 
 describe('smart stamp should', () => {
+
+  afterEach(() => {
+    NONE.resetState();
+  });
+
   it('render a type of none by default', () => {
     const actual =
       NONE
@@ -27,5 +32,35 @@ describe('smart stamp should', () => {
         .mapsTo('handleOnClick');
 
     assert(isMapped);
+  });
+
+  it('set the stamp to first class on the first click', () => {
+    NONE.component.props.onClick();
+
+    const actual = NONE.getState().type;
+    const expected = stampTypes.FIRST_CLASS;
+
+    assert.deepEqual(actual, expected);
+  });
+
+  it('set the stamp to second class on the second click', () => {
+    NONE.component.props.onClick();
+    NONE.component.props.onClick();
+
+    const actual = NONE.getState().type;
+    const expected = stampTypes.SECOND_CLASS;
+
+    assert.deepEqual(actual, expected);
+  });
+
+  it('set the stamp to none on the third click', () => {
+    NONE.component.props.onClick();
+    NONE.component.props.onClick();
+    NONE.component.props.onClick();
+
+    const actual = NONE.getState().type;
+    const expected = stampTypes.NONE;
+
+    assert.deepEqual(actual, expected);
   });
 });

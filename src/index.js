@@ -40,8 +40,9 @@ const flavourComponent = stampit()
 const flavourInit = function ({instance}) {
   const output = instance.shallowRenderer.getRenderOutput();
 
+  this.initialState = _.assign({}, instance.shallowRenderer._instance._instance.state);
+  this.state = _.assign({}, this.initialState);
   this.type = output.type;
-
   this.component = flavourComponent(_.assign({}, output, {reactClass: instance.reactClass}));
 
   this.childMap =
@@ -57,6 +58,14 @@ const flavourInit = function ({instance}) {
 
   // console.log('childMap', this.childMap);
   // console.log('typeMap', this.typeMap);
+};
+
+const resetState = function () {
+  this.shallowRenderer._instance._instance.state = _.assign({}, this.initialState);
+};
+
+const getState = function () {
+  return this.shallowRenderer._instance._instance.state;
 };
 
 const convertAndReduce = function (children, parentIndx) {
@@ -116,6 +125,8 @@ const countComponents = function (component) {
 };
 
 const flavourMethods = {
+  getState,
+  resetState,
   convertAndReduce,
   reduceChildren,
   reduceTypes,
