@@ -8,10 +8,7 @@ import Address from '../address/address';
 import ReactTester from '../../../src/index';
 
 const tester = ReactTester.create().use(Postcard);
-const flavours = {
-  STANDARD: 1
-};
-tester.addFlavour(flavours.STANDARD, {
+const STANDARD = tester.addFlavour('STANDARD', {
   comingFrom: 'some place',
   message: 'some message',
   signature: 'some signature',
@@ -21,11 +18,7 @@ tester.addFlavour(flavours.STANDARD, {
 
 describe('postcard should', () => {
   it('render a welcome component', () => {
-    const actual =
-      tester
-        .flavours
-        .get(flavours.STANDARD)
-        .countComponents(Welcome);
+    const actual = STANDARD.countComponents(Welcome);
     const expected = 1;
 
     assert.deepEqual(actual, expected);
@@ -33,9 +26,7 @@ describe('postcard should', () => {
 
   it('give comingFrom to the welcome component', () => {
     const actual =
-      tester
-        .flavours
-        .get(flavours.STANDARD)
+      STANDARD
         .findComponents(Welcome)[0]
         .props
         .text;
@@ -45,11 +36,7 @@ describe('postcard should', () => {
   });
 
   it('render a message component', () => {
-    const actual =
-      tester
-        .flavours
-        .get(flavours.STANDARD)
-        .countComponents(Message);
+    const actual = STANDARD.countComponents(Message);
     const expected = 1;
 
     assert.deepEqual(actual, expected);
@@ -57,9 +44,7 @@ describe('postcard should', () => {
 
   it('give message to the message component', () => {
     const actual =
-      tester
-        .flavours
-        .get(flavours.STANDARD)
+      STANDARD
         .findComponents(Message)[0]
         .props
         .text;
@@ -69,11 +54,7 @@ describe('postcard should', () => {
   });
 
   it('render a signature component', () => {
-    const actual =
-      tester
-        .flavours
-        .get(flavours.STANDARD)
-        .countComponents(Signature);
+    const actual = STANDARD.countComponents(Signature);
     const expected = 1;
 
     assert.deepEqual(actual, expected);
@@ -81,9 +62,7 @@ describe('postcard should', () => {
 
   it('give signature to the signature component', () => {
     const actual =
-      tester
-        .flavours
-        .get(flavours.STANDARD)
+      STANDARD
         .findComponents(Signature)[0]
         .props
         .text;
@@ -93,22 +72,14 @@ describe('postcard should', () => {
   });
 
   it('render a stamp component', () => {
-    const actual =
-      tester
-        .flavours
-        .get(flavours.STANDARD)
-        .countComponents(Stamp);
+    const actual = STANDARD.countComponents(Stamp);
     const expected = 1;
 
     assert.deepEqual(actual, expected);
   });
 
   it('render an address component', () => {
-    const actual =
-      tester
-        .flavours
-        .get(flavours.STANDARD)
-        .countComponents(Address);
+    const actual = STANDARD.countComponents(Address);
     const expected = 1;
 
     assert.deepEqual(actual, expected);
@@ -116,9 +87,7 @@ describe('postcard should', () => {
 
   it('give addressee to the address component', () => {
     const actual =
-      tester
-        .flavours
-        .get(flavours.STANDARD)
+      STANDARD
         .findComponents(Address)[0]
         .props
         .addressee;
@@ -129,9 +98,7 @@ describe('postcard should', () => {
 
   it('give address to the address component', () => {
     const actual =
-      tester
-        .flavours
-        .get(flavours.STANDARD)
+      STANDARD
         .findComponents(Address)[0]
         .props
         .address;

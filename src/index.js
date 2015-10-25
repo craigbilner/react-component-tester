@@ -38,10 +38,14 @@ const flavourComponent = stampit()
 // METHODS
 
 const flavourInit = function ({instance}) {
-  this.component = flavourComponent(instance);
+  const output = instance.shallowRenderer.getRenderOutput();
+
+  this.type = output.type;
+
+  this.component = flavourComponent(_.assign({}, output, {reactClass: instance.reactClass}));
 
   this.childMap =
-    this.convertAndReduce(instance.props.children);
+    this.convertAndReduce(output.props.children);
 
   this.typeMap =
     Object
@@ -128,31 +132,30 @@ const flavour = stampit()
 
 // INIT
 const testerInit = function () {
-  this.componentToUse = null;
-  this.flavours = new Map();
+  this.ComponentToUse = null;
 };
 
 // METHODS
-const use = function (component) {
+const use = function (Component) {
   const ignore = ['constructor', 'componentWillUnmount', 'render'];
-  for (let key of Object.getOwnPropertyNames(component.prototype)) {
+  for (let key of Object.getOwnPropertyNames(Component.prototype)) {
     if (!~ignore.indexOf(key)) {
-      sinon.stub(component.prototype, key);
+      sinon.spy(Component.prototype, key);
     }
   }
-  this.componentToUse = component;
+  this.ComponentToUse = Component;
   return this;
 };
 
-const createFlavour = function (reactClass, {type, props}) {
+const createFlavour = function (name, reactClass, shallowRenderer) {
   return flavour({
+    name,
     reactClass,
-    type,
-    props
+    shallowRenderer
   });
 };
 
-const getShallowOutput = function (component, props) {
+const getShallowRenderer = function (component, props) {
   const shallowRenderer = TestUtils.createRenderer();
 
   shallowRenderer
@@ -161,22 +164,20 @@ const getShallowOutput = function (component, props) {
       props
     ));
 
-  return shallowRenderer.getRenderOutput();
+  return shallowRenderer;
 };
 
 const addFlavour = function (name, props) {
-  this.flavours.set(
+  return this.createFlavour(
     name,
-    this.createFlavour(
-      this.componentToUse,
-      this.getShallowOutput(this.componentToUse, props)
-    )
+    this.ComponentToUse,
+    this.getShallowRenderer(this.ComponentToUse, props)
   );
 };
 
 const testerMethods = {
   use,
-  getShallowOutput,
+  getShallowRenderer,
   createFlavour,
   addFlavour
 };

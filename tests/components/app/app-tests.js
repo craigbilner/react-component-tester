@@ -4,26 +4,21 @@ import Postcard from '../postcard/postcard';
 import ReactTester from '../../../src/index';
 
 const tester = ReactTester.create().use(App);
-const flavours = {
-  NONE: 1,
-  WITH_SIGNATURE: 2,
-  NO_SIGNATURE: 3
-};
-tester.addFlavour(flavours.NONE, {
+const NONE = tester.addFlavour('NONE', {
   comingFrom: 'Some random place',
   message: 'Some random message',
   signature: 'Joe Bloggs',
   addressee: 'Mrs Random Person',
   address: ['line 1', 'line 2']
 });
-tester.addFlavour(flavours.WITH_SIGNATURE, {
+const WITH_SIGNATURE = tester.addFlavour('WITH_SIGNATURE', {
   comingFrom: 'Some random place',
   message: 'Some random message',
   signature: 'Joe Bloggs',
   addressee: 'Mrs Random Person',
   address: ['line 1', 'line 2']
 });
-tester.addFlavour(flavours.NO_SIGNATURE, {
+const NO_SIGNATURE = tester.addFlavour('NO_SIGNATURE', {
   comingFrom: 'Some random place',
   message: 'Some random message',
   addressee: 'Mrs Random Person',
@@ -32,20 +27,14 @@ tester.addFlavour(flavours.NO_SIGNATURE, {
 
 describe('app should', () => {
   it('render as a div', () => {
-    const actual =
-      tester
-        .flavours
-        .get(flavours.NONE)
-        .type;
+    const actual = NONE.type;
     const expected = 'div';
     assert.deepEqual(actual, expected);
   });
 
   it('display as a flex row', () => {
     const actual =
-      tester
-        .flavours
-        .get(flavours.NONE)
+      NONE
         .component
         .style;
     const expected = {
@@ -58,9 +47,7 @@ describe('app should', () => {
 
   it('have a right gutter', () => {
     const rightGutter =
-      tester
-        .flavours
-        .get(flavours.NONE)
+      NONE
         .findChild('2');
     const actual = rightGutter.style;
     const expected = {
@@ -75,9 +62,7 @@ describe('app should', () => {
 
   it('render a Postcard component', () => {
     const actual =
-      tester
-        .flavours
-        .get(flavours.NONE)
+      NONE
         .countComponents(Postcard);
     const expected = 1;
 
@@ -86,9 +71,7 @@ describe('app should', () => {
 
   it('render the Postcard component with the given signature', () => {
     const actual =
-      tester
-        .flavours
-        .get(flavours.WITH_SIGNATURE)
+      WITH_SIGNATURE
         .findComponents(Postcard)[0]
         .props
         .signature;
@@ -99,9 +82,7 @@ describe('app should', () => {
 
   it('render the Postcard component with no signature if one is not given', () => {
     const signature =
-      tester
-        .flavours
-        .get(flavours.NO_SIGNATURE)
+      NO_SIGNATURE
         .findComponents(Postcard)[0]
         .props
         .signature;

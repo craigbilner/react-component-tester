@@ -4,17 +4,12 @@ import stampTypes from './stamp-types';
 import ReactTester from '../../../src/index';
 
 const tester = ReactTester.create().use(Stamp);
-const flavours = {
-  NONE: 1
-};
-tester.addFlavour(flavours.NONE, {});
+const NONE = tester.addFlavour('NONE', {});
 
 describe('smart stamp should', () => {
   it('render a type of none by default', () => {
     const actual =
-      tester
-        .flavours
-        .get(flavours.NONE)
+      NONE
         .component
         .props
         .type;
@@ -26,12 +21,10 @@ describe('smart stamp should', () => {
 
   it('pass the expected onClick function to the dumb component', () => {
     const isMapped =
-      tester
-    .flavours
-    .get(flavours.NONE)
-    .component
-    .propFunc('onClick')
-    .mapsTo('handleOnClick');
+      NONE
+        .component
+        .propFunc('onClick')
+        .mapsTo('handleOnClick');
 
     assert(isMapped);
   });
