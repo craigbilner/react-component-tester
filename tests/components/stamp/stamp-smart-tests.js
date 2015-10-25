@@ -23,4 +23,16 @@ describe('smart stamp should', () => {
 
     assert.deepEqual(actual, expected);
   });
+
+  it('pass the expected onClick function to the dumb component', () => {
+    const isMapped =
+      tester
+    .flavours
+    .get(flavours.NONE)
+    .component
+    .propFunc('onClick')
+    .mapsTo('handleOnClick');
+
+    assert(isMapped);
+  });
 });

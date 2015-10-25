@@ -2,13 +2,43 @@ import stampit from 'stampit';
 import _ from 'lodash';
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
+import sinon from 'sinon';
+
+// FLAVOUR COMPONENT
+
+// METHODS
+
+const propFunc = function (propToTest) {
+  this.propToTest = propToTest;
+  return this;
+};
+
+const mapsTo = function (method) {
+  const symbolToTest = Symbol(method);
+  this.props[this.propToTest](symbolToTest);
+
+  return this.reactClass.prototype[method].calledWith(symbolToTest);
+};
+
+const flavourComponentMethods = {
+  propFunc,
+  mapsTo
+};
+
+const flavourComponentInit = function ({instance}) {
+  this.style = instance.props.style;
+};
+
+const flavourComponent = stampit()
+  .init(flavourComponentInit)
+  .methods(flavourComponentMethods);
 
 // FLAVOUR
 
 // METHODS
 
 const flavourInit = function ({instance}) {
-  this.component = this.makeModel(instance);
+  this.component = flavourComponent(instance);
 
   this.childMap =
     this.convertAndReduce(instance.props.children);
@@ -23,14 +53,6 @@ const flavourInit = function ({instance}) {
 
   // console.log('childMap', this.childMap);
   // console.log('typeMap', this.typeMap);
-};
-
-const makeModel = function ({type, props}) {
-  return {
-    type,
-    style: props.style || {},
-    props: _.omit(props, 'style', 'children', '_radiumDidResolveStyles')
-  }
 };
 
 const convertAndReduce = function (children, parentIndx) {
@@ -49,7 +71,7 @@ const reduceChildren =
 
     if (childIsElement) {
       const id = parentIndx >= 0 ? parentIndx + '.' + indx : indx;
-      childMap[id] = this.makeModel(child);
+      childMap[id] = flavourComponent(child);
 
       _.assign(
         childMap,
@@ -90,7 +112,6 @@ const countComponents = function (component) {
 };
 
 const flavourMethods = {
-  makeModel,
   convertAndReduce,
   reduceChildren,
   reduceTypes,
@@ -113,12 +134,19 @@ const testerInit = function () {
 
 // METHODS
 const use = function (component) {
+  const ignore = ['constructor', 'componentWillUnmount', 'render'];
+  for (let key of Object.getOwnPropertyNames(component.prototype)) {
+    if (!~ignore.indexOf(key)) {
+      sinon.stub(component.prototype, key);
+    }
+  }
   this.componentToUse = component;
   return this;
 };
 
-const createFlavour = function ({type, props}) {
+const createFlavour = function (reactClass, {type, props}) {
   return flavour({
+    reactClass,
     type,
     props
   });
@@ -139,7 +167,10 @@ const getShallowOutput = function (component, props) {
 const addFlavour = function (name, props) {
   this.flavours.set(
     name,
-    this.createFlavour(this.getShallowOutput(this.componentToUse, props))
+    this.createFlavour(
+      this.componentToUse,
+      this.getShallowOutput(this.componentToUse, props)
+    )
   );
 };
 
