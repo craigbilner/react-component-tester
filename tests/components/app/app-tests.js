@@ -33,10 +33,7 @@ describe('app should', () => {
   });
 
   it('display as a flex row', () => {
-    const actual =
-      NONE
-        .component
-        .style;
+    const actual = NONE.component.style;
     const expected = {
       display: 'flex',
       flexFlow: 'row'
@@ -46,9 +43,7 @@ describe('app should', () => {
   });
 
   it('have a right gutter', () => {
-    const rightGutter =
-      NONE
-        .findChild('2');
+    const rightGutter = NONE.findChild('2');
     const actual = rightGutter.style;
     const expected = {
       flex: 0,
@@ -61,10 +56,15 @@ describe('app should', () => {
   });
 
   it('render a Postcard component', () => {
-    const actual =
-      NONE
-        .countComponents(Postcard);
+    const actual = NONE.countComponents(Postcard);
     const expected = 1;
+
+    assert.deepEqual(actual, expected);
+  });
+
+  it('render the Postcard component in the expected position', () => {
+    const actual = NONE.findChild('1.0.0').type;
+    const expected = Postcard;
 
     assert.deepEqual(actual, expected);
   });
