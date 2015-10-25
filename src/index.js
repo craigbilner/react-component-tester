@@ -8,8 +8,10 @@ import TestUtils from 'react-addons-test-utils';
 // METHODS
 
 const flavourInit = function ({instance}) {
+  this.component = this.makeModel(instance);
+
   this.childMap =
-    this.convertAndReduce(instance.children);
+    this.convertAndReduce(instance.props.children);
 
   this.typeMap =
     Object
@@ -21,6 +23,14 @@ const flavourInit = function ({instance}) {
 
   // console.log('childMap', this.childMap);
   // console.log('typeMap', this.typeMap);
+};
+
+const makeModel = function ({type, props}) {
+  return {
+    type,
+    style: props.style || {},
+    props: _.omit(props, 'style', 'children', '_radiumDidResolveStyles')
+  }
 };
 
 const convertAndReduce = function (children, parentIndx) {
@@ -39,11 +49,7 @@ const reduceChildren =
 
     if (childIsElement) {
       const id = parentIndx >= 0 ? parentIndx + '.' + indx : indx;
-      childMap[id] = {
-        type: child.type,
-        style: child.props.style || {},
-        props: _.omit(child.props, 'style', 'children', '_radiumDidResolveStyles')
-      };
+      childMap[id] = this.makeModel(child);
 
       _.assign(
         childMap,
@@ -84,6 +90,7 @@ const countComponents = function (component) {
 };
 
 const flavourMethods = {
+  makeModel,
   convertAndReduce,
   reduceChildren,
   reduceTypes,
@@ -100,41 +107,45 @@ const flavour = stampit()
 
 // INIT
 const testerInit = function () {
-  this.component = null;
+  this.componentToUse = null;
   this.flavours = new Map();
 };
 
 // METHODS
 const use = function (component) {
-  this.component = component;
+  this.componentToUse = component;
   return this;
 };
 
 const createFlavour = function ({type, props}) {
   return flavour({
     type,
-    style: props.style,
-    children: props.children
+    props
   });
 };
 
-const addFlavour = function (name, props) {
+const getShallowOutput = function (component, props) {
   const shallowRenderer = TestUtils.createRenderer();
 
   shallowRenderer
     .render(React.createElement(
-      this.component,
+      component,
       props
     ));
 
+  return shallowRenderer.getRenderOutput();
+};
+
+const addFlavour = function (name, props) {
   this.flavours.set(
     name,
-    this.createFlavour(shallowRenderer.getRenderOutput())
+    this.createFlavour(this.getShallowOutput(this.componentToUse, props))
   );
 };
 
 const testerMethods = {
   use,
+  getShallowOutput,
   createFlavour,
   addFlavour
 };

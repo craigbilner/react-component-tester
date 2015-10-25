@@ -46,6 +46,7 @@ describe('app should', () => {
       tester
         .flavours
         .get(flavours.NONE)
+        .component
         .style;
     const expected = {
       display: 'flex',

@@ -1,17 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import Stamp from './stamp-dumb';
+import stampTypes from './stamp-types';
 
 export default class StampSmartComponent extends Component {
   constructor(props) {
     super(props);
 
-    this.stampTypes = {
-      NONE: 1,
-      FIRST_CLASS: 2,
-      SECOND_CLASS: 3
-    };
     this.state = {
-      type: this.stampTypes.NONE
+      type: stampTypes.NONE
     };
   }
 
@@ -37,14 +33,14 @@ export default class StampSmartComponent extends Component {
 
   handleOnClick() {
     this.setState({
-      type: this.getNextStampType(this.stampTypes, this.state.type)
+      type: this.getNextStampType(stampTypes, this.state.type)
     });
   }
 
   render() {
     return (
       <Stamp
-        types={this.stampTypes}
+        types={stampTypes}
         type={this.state.type}
         onClick={this.handleOnClick.bind(this)}
         />
