@@ -5,7 +5,7 @@ import ReactTester from '../../../src/index';
 const tester = ReactTester.create().use(Welcome);
 const NOTHING = tester.addFlavour('NOTHING', {});
 const SOMETHING = tester.addFlavour('SOMETHING', {
-  text: 'Welcome from this place'
+  text: 'Welcome from this place',
 });
 
 describe('welcome should', () => {

@@ -1,20 +1,20 @@
 export default {
   comp: {
     display: 'flex',
-    flexFlow: 'row'
+    flexFlow: 'row',
   },
   gutter: {
     flex: 0,
     '@media (min-width: 400px)': {
-      flex: 1
-    }
+      flex: 1,
+    },
   },
   body: {
     flex: 3,
-    position: 'relative'
+    position: 'relative',
   },
   cardContainer: {
     position: 'absolute',
-    width: '100%'
-  }
+    width: '100%',
+  },
 };

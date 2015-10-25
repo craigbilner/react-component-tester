@@ -1,3 +1,5 @@
+/* eslint-disable indent */
+
 import React, { Component, PropTypes } from 'react';
 import Stamp from './stamp-dumb';
 import stampTypes from './stamp-types';
@@ -7,7 +9,7 @@ export default class StampSmartComponent extends Component {
     super(props);
 
     this.state = props.state || {
-        type: stampTypes.NONE
+        type: stampTypes.NONE,
       };
   }
 
@@ -33,7 +35,7 @@ export default class StampSmartComponent extends Component {
 
   handleOnClick() {
     this.setState({
-      type: this.getNextStampType(stampTypes, this.state.type)
+      type: this.getNextStampType(stampTypes, this.state.type),
     });
   }
 
@@ -48,4 +50,8 @@ export default class StampSmartComponent extends Component {
   }
 }
 
-StampSmartComponent.propTypes = {};
+StampSmartComponent.propTypes = {
+  state: PropTypes.shape({
+    type: PropTypes.number,
+  }),
+};

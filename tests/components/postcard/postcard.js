@@ -1,5 +1,5 @@
 import React from 'react';
-import Radium from 'radium';
+import radium from 'radium';
 import styles from './postcard-styles';
 import Welcome from '../welcome/welcome';
 import Message from '../message/message';
@@ -7,7 +7,7 @@ import Signature from '../signature/signature';
 import Stamp from '../stamp/stamp-smart';
 import Address from '../address/address';
 
-export default Radium(({comingFrom, message, signature, address, addressee}) => (
+export default radium(({comingFrom, message, signature, address, addressee}) => (
   <div style={styles.comp}>
     <div style={styles.left}>
       <Welcome

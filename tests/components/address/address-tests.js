@@ -5,15 +5,15 @@ import ReactTester from '../../../src/index';
 
 const tester = ReactTester.create().use(Address);
 const NO_ADDRESS = tester.addFlavour('NO_ADDRESS', {
-  addressee: 'Mr Robert Smith'
+  addressee: 'Mr Robert Smith',
 });
 const THREE_LINES = tester.addFlavour('THREE_LINES', {
   addressee: 'Mr Joanne Robinson',
-  address: ['line 31', 'line 32', 'line 33']
+  address: ['line 31', 'line 32', 'line 33'],
 });
 const FIVE_LINES = tester.addFlavour('FIVE_LINES', {
   addressee: 'Mrs Jack Jones',
-  address: ['line 51', 'line 52', 'line 53', 'Line 54', 'Line 55']
+  address: ['line 51', 'line 52', 'line 53', 'Line 54', 'Line 55'],
 });
 
 describe('address should', () => {

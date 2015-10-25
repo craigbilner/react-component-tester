@@ -15,7 +15,7 @@ const address = [
   '25 random road',
   'Random town',
   'Random county',
-  'ID8 9JD'
+  'ID8 9JD',
 ];
 
 ReactDOM.render(<App

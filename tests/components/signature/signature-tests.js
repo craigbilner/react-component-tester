@@ -5,7 +5,7 @@ import ReactTester from '../../../src/index';
 const tester = ReactTester.create().use(Signature);
 const NOTHING = tester.addFlavour('NOTHING', {});
 const SOMETHING = tester.addFlavour('SOMETHING', {
-  text: 'Jack Johnson'
+  text: 'Jack Johnson',
 });
 
 describe('signature should', () => {

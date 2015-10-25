@@ -5,7 +5,7 @@ export default {
     transformOrigin: 'right',
     margin: '0 2rem 2rem 0',
     '@media (min-width: 1200px)': {
-      fontSize: '2rem'
-    }
-  }
+      fontSize: '2rem',
+    },
+  },
 };

@@ -1,14 +1,14 @@
 import React from 'react';
-import Radium from 'radium';
+import radium from 'radium';
 import styles from './app-styles';
 import Postcard from '../postcard/postcard';
 
-export default Radium(({
+export default radium(({
   comingFrom,
   message,
   signature,
   addressee,
-  address
+  address,
   }) => (
   <div style={styles.comp}>
     <div style={styles.gutter}></div>

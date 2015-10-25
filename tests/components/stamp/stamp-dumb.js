@@ -1,3 +1,5 @@
+/* eslint-disable indent */
+
 import React from 'react';
 import styles from './stamp-styles';
 
@@ -13,7 +15,7 @@ export default ({types, type, onClick}) => (
           case types.SECOND_CLASS:
             return '2nd';
           default:
-            return 'Unknown stamp'
+            return 'Unknown stamp';
         }
       })()
     }

@@ -13,7 +13,7 @@ const STANDARD = tester.addFlavour('STANDARD', {
   message: 'some message',
   signature: 'some signature',
   address: ['line 1', 'postcode'],
-  addressee: 'some name'
+  addressee: 'some name',
 });
 
 describe('postcard should', () => {

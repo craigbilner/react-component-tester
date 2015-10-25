@@ -7,12 +7,11 @@ const tester = ReactTester.create().use(Stamp);
 const NONE = tester.addFlavour('NONE', {});
 const SECOND_CLASS = tester.addFlavour('SECOND_CLASS', {
   state: {
-    type: stampTypes.SECOND_CLASS
-  }
+    type: stampTypes.SECOND_CLASS,
+  },
 });
 
 describe('smart stamp should', () => {
-
   afterEach(() => {
     NONE.resetState();
   });

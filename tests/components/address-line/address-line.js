@@ -1,8 +1,8 @@
 import React from 'react';
-import Radium from 'radium';
+import radium from 'radium';
 import styles from './address-line-styles';
 
-export default Radium(({text}) => (
+export default radium(({text}) => (
   <div style={styles.comp}>
     {text}
   </div>

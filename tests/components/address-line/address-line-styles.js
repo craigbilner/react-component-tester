@@ -6,7 +6,7 @@ export default {
     boxSizing: 'border-box',
     textAlign: 'right',
     '@media (min-width: 1200px)': {
-      fontSize: '2.5rem'
-    }
-  }
+      fontSize: '2.5rem',
+    },
+  },
 };

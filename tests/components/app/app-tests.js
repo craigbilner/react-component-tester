@@ -9,20 +9,20 @@ const NONE = tester.addFlavour('NONE', {
   message: 'Some random message',
   signature: 'Joe Bloggs',
   addressee: 'Mrs Random Person',
-  address: ['line 1', 'line 2']
+  address: ['line 1', 'line 2'],
 });
 const WITH_SIGNATURE = tester.addFlavour('WITH_SIGNATURE', {
   comingFrom: 'Some random place',
   message: 'Some random message',
   signature: 'Joe Bloggs',
   addressee: 'Mrs Random Person',
-  address: ['line 1', 'line 2']
+  address: ['line 1', 'line 2'],
 });
 const NO_SIGNATURE = tester.addFlavour('NO_SIGNATURE', {
   comingFrom: 'Some random place',
   message: 'Some random message',
   addressee: 'Mrs Random Person',
-  address: ['line 1', 'line 2']
+  address: ['line 1', 'line 2'],
 });
 
 describe('app should', () => {
@@ -36,7 +36,7 @@ describe('app should', () => {
     const actual = NONE.component.style;
     const expected = {
       display: 'flex',
-      flexFlow: 'row'
+      flexFlow: 'row',
     };
 
     assert.deepEqual(actual, expected);
@@ -48,8 +48,8 @@ describe('app should', () => {
     const expected = {
       flex: 0,
       '@media (min-width: 400px)': {
-        flex: 1
-      }
+        flex: 1,
+      },
     };
 
     assert.deepEqual(actual, expected);

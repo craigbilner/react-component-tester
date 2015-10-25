@@ -5,7 +5,7 @@ import ReactTester from '../../../src/index';
 const tester = ReactTester.create().use(Message);
 const NOTHING = tester.addFlavour('NOTHING', {});
 const SOMETHING = tester.addFlavour('SOMETHING', {
-  text: 'some text here'
+  text: 'some text here',
 });
 
 describe('message should', () => {
