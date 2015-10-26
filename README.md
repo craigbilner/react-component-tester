@@ -1,8 +1,8 @@
-#react component tester
+# react component tester
 
 because testing components with shallow rendering is fantastic...but can be a bit of a pain
 
-#requirements
+# requirements
 
 * test a component quickly (~5ms per test)
 * test the style of components easily
@@ -13,11 +13,11 @@ because testing components with shallow rendering is fantastic...but can be a bi
 * test changes of state of smart components
 * abstract away from the react components themselves and their API
 
-#usage
+# usage
 
 a component system that builds a basic responsive postcard can be found in the tests directory with example usage (which also self tests the library)
 
-##flavours
+## flavours
 
 often you want to test how components are rendered with different prop values. this tester allows the addition of "flavours" to make the test code more terse
 
@@ -37,9 +37,9 @@ then the flavour can be tested on, here the NONE flavour's type is checked
     const expected = 'div';
     assert.deepEqual(actual, expected);
 
-##methods
+## methods
 
-###countComponents
+### countComponents
 
 takes a react component and returns the number of times it appears in the rendered tree for the component under test
 
@@ -52,7 +52,7 @@ here the THREE_LINES flavour is tested for the number of AddressLine components 
         assert.deepEqual(actual, expected);
     });
 
-###findChild
+### findChild
 
 takes a zero based decimal delimited string path and returns the resulting rendered component. this will make your tests more brittle to DOM changes but can come in handy
 
@@ -64,7 +64,7 @@ here the first child is found. if we wanted the second child of the third child 
 
     assert.deepEqual(actual, expected);
 
-###findComponents
+### findComponents
 
 takes a react component and returns an array of all child rendered components of that type
 
@@ -76,7 +76,7 @@ here we find all AddressLine components for the NO_ADDRESS flavour, take the fir
  
     assert.deepEqual(actual, expected);
 
-###getState
+### getState
 
 returns the current state of the given component flavour. resetState should be run after each test to ensure tests do not collide
 
@@ -89,10 +89,12 @@ here we fire the click function given to the dumb component and confirm that the
 
     assert.deepEqual(actual, expected);
     
-###propFunc, mapsTo
+### propFunc, mapsTo
 
 propFunc takes a string which is the prop of a dumb component to which you are passing a function
+
 mapTo takes a string which maps to the method on the smart component class
+
 the returned value will be a boolean indicating if the given prop function maps to the expected class method
 
 here we test that the stamp dumb component was correctly given the smart component's handleOnClick method 
@@ -105,28 +107,28 @@ here we test that the stamp dumb component was correctly given the smart compone
     
         assert(isMapped);
 
-###resetState
+### resetState
 
 returns the state of the flavour of the component under test to the initial state
 
-##properties
+## properties
 
-###component
+### component
 
 the rendered component that is under test
 
-###props
+### props
 
 the props of the rendered component will be returned for each component found
 
-###style
+### style
 
 for ease of use, the style prop is placed on each component too
 
-###type
+### type
 
 each returned component will have a type
 
-###value
+### value
 
 if a component doesn't have any children, it's content will be added as the value property
