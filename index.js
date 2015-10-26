@@ -1,3 +1,3 @@
-import ReactTester from './src/index';
+const ReactTester = require('./src/index');
 
-export default ReactTester;
+module.exports = ReactTester;
