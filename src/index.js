@@ -147,11 +147,11 @@ const testerInit = function() {
 // METHODS
 const use = function(Component) {
   const ignore = ['constructor', 'componentWillUnmount', 'render'];
-  for (const key of Object.getOwnPropertyNames(Component.prototype)) {
-    if (!~ignore.indexOf(key)) {
-      sinon.spy(Component.prototype, key);
+  Object.getOwnPropertyNames(Component.prototype).forEach(method => {
+    if (!~ignore.indexOf(method)) {
+      sinon.spy(Component.prototype, method);
     }
-  }
+  });
   this.ComponentToUse = Component;
   return this;
 };
