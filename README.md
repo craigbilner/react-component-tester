@@ -21,7 +21,7 @@ a component system that builds a basic responsive postcard can be found in the t
 
 often you want to test how components are rendered with different prop values. this tester allows the addition of "flavours" to make the test code more terse
 
-to create a tester run create and pass in the component under test to "be used"
+to create a tester, run create and pass in the component under test to "be used"
 
     const tester = ReactTester.create().use(Address);
     
@@ -56,7 +56,7 @@ here the THREE_LINES flavour is tested for the number of AddressLine components 
 
 takes a zero based decimal delimited string path and returns the resulting rendered component. this will make your tests more brittle to DOM changes but can come in handy
 
-here the first child is found. if we wanted the second child of the third child of the four child we would pass "3.2.1"
+here the first child is found. if we wanted the second child of the third child of the fourth child we would pass "3.2.1"
 
     const value = NOTHING.findChild('0');
     const actual = typeof value;
@@ -105,7 +105,7 @@ here we test that the stamp dumb component was correctly given the smart compone
             .propFunc('onClick')
             .mapsTo('handleOnClick');
     
-        assert(isMapped);
+    assert(isMapped);
 
 ### resetState
 
