@@ -1,6 +1,6 @@
 {
   "name": "react-component-tester",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A simple helper to make testing react components with shallow rendering easier",
   "main": "index.js",
   "scripts": {
@@ -20,7 +20,14 @@
     "react",
     "testing",
     "shallow",
-    "rendering"
+    "rendering",
+    "react-test",
+    "react-testing",
+    "react-tester",
+    "react-component",
+    "react-shallow-rendering",
+    "react-test-help",
+    "react-testing-helpers"
   ],
   "author": "Craig Bilner",
   "license": "Apache-2.0",
