@@ -39,7 +39,7 @@ then the flavour can be tested on, here the NONE flavour's type is checked
 
 ## methods
 
-### countComponents
+### .countComponents(Component{ReactComponent}) => count{int}
 
 takes a react component and returns the number of times it appears in the rendered tree for the component under test
 
@@ -52,7 +52,7 @@ here the THREE_LINES flavour is tested for the number of AddressLine components 
         assert.deepEqual(actual, expected);
     });
 
-### findChild
+### .findChild(path{string}) => child{ReactComponent}
 
 takes a zero based decimal delimited string path and returns the resulting rendered component. this will make your tests more brittle to DOM changes but can come in handy
 
@@ -64,7 +64,7 @@ here the first child is found. if we wanted the second child of the third child 
 
     assert.deepEqual(actual, expected);
 
-### findComponents
+### .findComponents(Component{ReactComponent}) => [Component{ReactComponent}]
 
 takes a react component and returns an array of all child rendered components of that type
 
@@ -76,7 +76,7 @@ here we find all AddressLine components for the NO_ADDRESS flavour, take the fir
  
     assert.deepEqual(actual, expected);
 
-### getState
+### .getState() => state{object}
 
 returns the current state of the given component flavour. resetState should be run after each test to ensure tests do not collide
 
@@ -89,7 +89,7 @@ here we fire the click function given to the dumb component and confirm that the
 
     assert.deepEqual(actual, expected);
     
-### propFunc, mapsTo
+### .propFunc(propName{string}), .mapsTo(methodName{string}) => isMapped{boolean}
 
 propFunc takes a string which is the prop of a dumb component to which you are passing a function
 
@@ -107,28 +107,28 @@ here we test that the stamp dumb component was correctly given the smart compone
     
     assert(isMapped);
 
-### resetState
+### .resetState()
 
 returns the state of the flavour of the component under test to the initial state
 
 ## properties
 
-### component
+### component{renderedReactComponent}
 
 the rendered component that is under test
 
-### props
+### props{object}
 
 the props of the rendered component will be returned for each component found
 
-### style
+### style{object}
 
 for ease of use, the style prop is placed on each component too
 
-### type
+### type{componentType}
 
 each returned component will have a type
 
-### value
+### value{string}
 
 if a component doesn't have any children, it's content will be added as the value property
