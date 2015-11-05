@@ -16,7 +16,7 @@ export default ({ i18n, links }) => (
             </a>
         </li>
         {
-            links.map(link => <li key={link.title}>{link}</li>)
+            links.map(link => <li key={link.title}>{link.text}</li>)
         }
     </ul>
 );
