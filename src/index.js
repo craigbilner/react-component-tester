@@ -25,11 +25,11 @@ const flavourComponentMethods = {
   mapsTo,
 };
 
-const flavourComponentInit = function({ instance }) {
-  this.style = instance.props.style;
+const flavourComponentInit = function(opts) {
+  this.style = opts.instance.props.style;
 
-  if (!TestUtils.isElement(instance.props.children)) {
-    this.value = instance.props.children;
+  if (!TestUtils.isElement(opts.instance.props.children)) {
+    this.value = opts.instance.props.children;
   }
 };
 
