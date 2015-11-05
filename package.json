@@ -9,7 +9,7 @@
     "watch:testrig": "npm run build:test -- --progress --colors --watch",
     "test": "mocha ./tests/**/*tests.js --compilers js:babel/register",
     "posttest": "npm run lint",
-    "test:spec": "mocha ./tests/components/stamp/stamp-smart-tests.js --compilers js:babel/register",
+    "test:spec": "mocha ./tests/components/stamp/stamp-dumb-tests.js --compilers js:babel/register",
     "lint": "eslint ."
   },
   "repository": {

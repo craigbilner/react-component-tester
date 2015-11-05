@@ -9,13 +9,21 @@ export default ({types, type, onClick}) => (
       (() => {
         switch (type) {
           case types.NONE:
-            return 'Place stamp here';
+            return (
+                <div>Place stamp here</div>
+            );
           case types.FIRST_CLASS:
-            return '1st';
+            return (
+                <div>1st</div>
+            );
           case types.SECOND_CLASS:
-            return '2nd';
+            return (
+              <div>2nd</div>
+          );
           default:
-            return 'Unknown stamp';
+            return (
+                <div>Unknown stamp</div>
+            );
         }
       })()
     }
