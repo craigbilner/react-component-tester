@@ -25,13 +25,17 @@ const flavourComponentMethods = {
   mapsTo,
 };
 
-const flavourComponentInit = function(opts) {
-  this.style = opts.instance.props.style;
+const flavourComponentInit = function({ instance }) {
+  this.style = instance.props.style;
+
+  if (!TestUtils.isElement(instance.props.children)) {
+    this.value = instance.props.children;
+  }
 };
 
 const flavourComponent = stampit()
-    .init(flavourComponentInit)
-    .methods(flavourComponentMethods);
+  .init(flavourComponentInit)
+  .methods(flavourComponentMethods);
 
 // FLAVOUR
 
@@ -39,38 +43,38 @@ const flavourComponent = stampit()
 
 /* eslint-disable no-use-before-define */
 const reduceChildren =
-    function(parentIndx, childMap, child, indx) {
-      const childIsElement = TestUtils.isElement(child);
+  function(parentIndx, childMap, child, indx) {
+    const childIsElement = TestUtils.isElement(child);
+    const id = parentIndx >= 0 ? parentIndx + '.' + indx : indx;
 
-      if (childIsElement) {
-        const id = parentIndx >= 0 ? parentIndx + '.' + indx : indx;
-        childMap[id] = flavourComponent(child);
+    if (childIsElement) {
+      childMap[id] = flavourComponent(child);
 
-        _.assign(
-            childMap,
-            convertAndReduce(
-                child.props.children,
-                id
-            )
-        );
-      } else {
-        childMap[indx] = {
-          value: child,
-        };
-      }
+      _.assign(
+        childMap,
+        convertAndReduce(
+          child.props.children,
+          id
+        )
+      );
+    } else {
+      childMap[id] = {
+        value: child,
+      };
+    }
 
-      return childMap;
-    };
+    return childMap;
+  };
 /* eslint-enable no-use-before-define */
 
 const convertAndReduce = function(children, parentIndx) {
   return React
-      .Children
-      .toArray(children)
-      .reduce(
+    .Children
+    .toArray(children)
+    .reduce(
       reduceChildren.bind(this, parentIndx),
       {}
-  );
+    );
 };
 
 const reduceTypes = function(childMap, typeMap, key) {
@@ -91,14 +95,14 @@ const flavourInit = function(opts) {
   this.component = flavourComponent(_.assign({}, output, {reactClass: opts.instance.reactClass}));
 
   this.childMap =
-      convertAndReduce(output.props.children);
+    convertAndReduce(output.props.children);
 
   this.typeMap =
-      Object
-          .keys(this.childMap)
-          .reduce(
-          reduceTypes.bind(null, this.childMap),
-          new Map()
+    Object
+      .keys(this.childMap)
+      .reduce(
+        reduceTypes.bind(null, this.childMap),
+        new Map()
       );
 
   // console.log('childMap', this.childMap);
@@ -134,8 +138,8 @@ const flavourMethods = {
 };
 
 const flavour = stampit()
-    .init(flavourInit)
-    .methods(flavourMethods);
+  .init(flavourInit)
+  .methods(flavourMethods);
 
 // TESTER
 
@@ -168,19 +172,19 @@ const getShallowRenderer = function(component, props) {
   const shallowRenderer = TestUtils.createRenderer();
 
   shallowRenderer
-      .render(React.createElement(
-          component,
-          props
-      ));
+    .render(React.createElement(
+      component,
+      props
+    ));
 
   return shallowRenderer;
 };
 
 const addFlavour = function(name, props) {
   return createFlavour(
-      name,
-      this.ComponentToUse,
-      getShallowRenderer(this.ComponentToUse, props)
+    name,
+    this.ComponentToUse,
+    getShallowRenderer(this.ComponentToUse, props)
   );
 };
 
@@ -191,8 +195,8 @@ const testerMethods = {
 
 // STAMP
 const ReactTester =
-    stampit()
-        .init(testerInit)
-        .methods(testerMethods);
+  stampit()
+    .init(testerInit)
+    .methods(testerMethods);
 
 module.exports = ReactTester;

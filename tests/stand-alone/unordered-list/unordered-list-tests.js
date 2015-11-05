@@ -19,4 +19,11 @@ describe('unordered list should', () => {
 
     assert.deepEqual(actual, expected);
   });
+
+  it('render the first anchor with the expected value with no dynamic links', () => {
+    const actual = NO_LINKS.findChild('0.0').value;
+    const expected = 'test help';
+
+    assert.deepEqual(actual, expected);
+  });
 });
