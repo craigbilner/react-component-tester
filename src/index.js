@@ -45,7 +45,7 @@ const flavourComponent = stampit()
 const reduceChildren =
   function(parentIndx, childMap, child, indx) {
     const childIsElement = TestUtils.isElement(child);
-    const id = parentIndx >= 0 ? parentIndx + '.' + indx : indx;
+    const id = parseInt(parentIndx, 10) >= 0 ? parentIndx + '.' + indx : indx;
 
     if (childIsElement) {
       childMap[id] = flavourComponent(child);
