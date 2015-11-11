@@ -16,8 +16,9 @@ const propFunc = function(propToTest) {
 const mapsTo = function(method) {
   const symbolToTest = Symbol(method);
   this.props[this.propToTest](symbolToTest);
+  const reactClass = this.reactClass || this.parentComponent.reactClass;
 
-  return this.reactClass.prototype[method].lastCall.args.indexOf(symbolToTest) > -1;
+  return reactClass.prototype[method].lastCall.args.indexOf(symbolToTest) > -1;
 };
 
 const flavourComponentMethods = {
@@ -43,16 +44,17 @@ const flavourComponent = stampit()
 
 /* eslint-disable no-use-before-define */
 const reduceChildren =
-  function(parentIndx, childMap, child, indx) {
+  function(parentComponent, parentIndx, childMap, child, indx) {
     const childIsElement = TestUtils.isElement(child);
     const id = parseInt(parentIndx, 10) >= 0 ? parentIndx + '.' + indx : indx;
 
     if (childIsElement) {
-      childMap[id] = flavourComponent(child);
+      childMap[id] = flavourComponent(_.assign({}, child, {parentComponent}));
 
       _.assign(
         childMap,
         convertAndReduce(
+          parentComponent,
           child.props.children,
           id
         )
@@ -67,12 +69,12 @@ const reduceChildren =
   };
 /* eslint-enable no-use-before-define */
 
-const convertAndReduce = function(children, parentIndx) {
+const convertAndReduce = function(parentComponent, children, parentIndx) {
   return React
     .Children
     .toArray(children)
     .reduce(
-      reduceChildren.bind(this, parentIndx),
+      reduceChildren.bind(null, parentComponent, parentIndx),
       {}
     );
 };
@@ -95,7 +97,7 @@ const flavourInit = function(opts) {
   this.component = flavourComponent(_.assign({}, output, {reactClass: opts.instance.reactClass}));
 
   this.childMap =
-    convertAndReduce(output.props.children);
+    convertAndReduce(this.component, output.props.children);
 
   this.typeMap =
     Object
