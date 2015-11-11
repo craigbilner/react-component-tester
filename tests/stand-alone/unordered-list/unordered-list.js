@@ -27,17 +27,27 @@ export default class UnorderedListComponent extends Component {
     ];
   }
 
+  handleOnClick() {
+    // do something
+  }
+
+  handleKeyPress() {
+    // do something
+  }
+
   render() {
     const { i18n = {}, links = [], rlinks = [], drlinkssrc = [], randomString = '', email = '' } = this.props;
     const drlinks = email ? this.getDrlinks(i18n, email, drlinkssrc, randomString) : [];
 
     return (
-      <ul className="class-1">
+      <ul className="class-1" onClick={this.handleOnClick}>
         <li className="class-2">
           <a href="some-href-1"
              title={i18n.help}
              target="_blank"
-             rel="help">
+             rel="help"
+             onKeyPress={this.handleKeyPress}
+          >
             {i18n.help}
           </a>
         </li>

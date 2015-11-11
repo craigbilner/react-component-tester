@@ -17,7 +17,7 @@ const mapsTo = function(method) {
   const symbolToTest = Symbol(method);
   this.props[this.propToTest](symbolToTest);
 
-  return ~this.reactClass.prototype[method].lastCall.args.indexOf(symbolToTest) >> 0;
+  return this.reactClass.prototype[method].lastCall.args.indexOf(symbolToTest) > -1;
 };
 
 const flavourComponentMethods = {

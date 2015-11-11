@@ -92,4 +92,25 @@ describe('unordered list should', () => {
 
     assert.deepEqual(actual, expected);
   });
+
+  it('map the expected click event to the component', () => {
+    const isMapped =
+      NO_LINKS
+        .component
+        .propFunc('onClick')
+        .mapsTo('handleOnClick');
+
+    assert(isMapped);
+  });
+
+  // it.only('map the expected key press event to the help link', () => {
+  //   const helpLink = NO_LINKS.findComponents('a')[0];
+  //
+  //   const isMapped =
+  //     helpLink
+  //       .propFunc('onKeyPress')
+  //       .mapsTo('handleKeyPress');
+  //
+  //   console.log(isMapped);
+  // });
 });
