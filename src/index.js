@@ -27,10 +27,12 @@ const flavourComponentMethods = {
 };
 
 const flavourComponentInit = function(opts) {
-  this.style = opts.instance.props.style;
+  if (opts.instance.props) {
+    this.style = opts.instance.props.style;
 
-  if (!TestUtils.isElement(opts.instance.props.children)) {
-    this.value = opts.instance.props.children;
+    if (!TestUtils.isElement(opts.instance.props.children)) {
+      this.value = opts.instance.props.children;
+    }
   }
 };
 
@@ -93,11 +95,15 @@ const flavourInit = function(opts) {
 
   this.initialState = _.assign({}, opts.instance.shallowRenderer._instance._instance.state);
   this.state = _.assign({}, this.initialState);
-  this.type = output.type;
   this.component = flavourComponent(_.assign({}, output, {reactClass: opts.instance.reactClass}));
 
-  this.childMap =
-    convertAndReduce(this.component, output.props.children);
+  if (output) {
+    this.type = output.type;
+    this.childMap = convertAndReduce(this.component, output.props.children);
+  } else {
+    this.type = output;
+    this.childMap = [];
+  }
 
   this.typeMap =
     Object
