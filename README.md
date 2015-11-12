@@ -24,13 +24,13 @@ often you want to test how components are rendered with different prop values. t
 to create a tester, run create and pass in the component under test to "be used"
 
     const tester = ReactTester.create().use(Address);
-    
+
 then add a flavour which takes a name and a props object
 
     const NO_ADDRESS = tester.addFlavour('NO_ADDRESS', {
       addressee: 'Mr Robert Smith',
     });
-    
+
 then the flavour can be tested on, here the NONE flavour's type is checked
 
     const actual = NONE.type;
@@ -73,7 +73,7 @@ here we find all AddressLine components for the NO_ADDRESS flavour, take the fir
     const addressee = NO_ADDRESS.findComponents(AddressLine)[0];
     const actual = addressee.props.text;
     const expected = 'Mr Robert Smith';
- 
+
     assert.deepEqual(actual, expected);
 
 ### .getState() => state{object}
@@ -88,7 +88,7 @@ here we fire the click function given to the dumb component and confirm that the
     const expected = stampTypes.FIRST_CLASS;
 
     assert.deepEqual(actual, expected);
-    
+
 ### .propFunc(propName{string}), .mapsTo(methodName{string}) => isMapped{boolean}
 
 propFunc takes a string which is the prop of a dumb component to which you are passing a function
@@ -97,19 +97,27 @@ mapTo takes a string which maps to the method on the smart component class
 
 the returned value will be a boolean indicating if the given prop function maps to the expected class method
 
-here we test that the stamp dumb component was correctly given the smart component's handleOnClick method 
+here we test that the stamp dumb component was correctly given the smart component's handleOnClick method
 
     const isMapped =
           NONE
             .component
             .propFunc('onClick')
             .mapsTo('handleOnClick');
-    
+
     assert(isMapped);
 
 ### .resetState()
 
 returns the state of the flavour of the component under test to the initial state
+
+### .teardown()
+
+If for any reason you need to restore spies placed on a component as part of set up you can use the teardown method. Returns the tester.
+
+    const tester = ReactTester.create().use(Address);
+    // Do stuff...
+    tester.teardown();
 
 ## properties
 
