@@ -111,7 +111,7 @@ here we test that the stamp dumb component was correctly given the smart compone
 
 returns the state of the flavour of the component under test to the initial state
 
-### .teardown()
+### .teardown() => {ReactComponentTester}
 
 If for any reason you need to restore spies placed on a component as part of set up you can use the teardown method. Returns the tester.
 
