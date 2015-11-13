@@ -157,10 +157,17 @@ const testerInit = function() {
 };
 
 // METHODS
+const restoreSpy = function(method) {
+  if (method.isSinonProxy) {
+    method.restore();
+  }
+};
+
 const use = function(Component) {
   const ignore = ['constructor', 'componentWillUnmount', 'render'];
   Object.getOwnPropertyNames(Component.prototype).forEach(method => {
     if (!~ignore.indexOf(method)) {
+      restoreSpy(Component.prototype[method]);
       sinon.spy(Component.prototype, method);
     }
   });
@@ -196,9 +203,20 @@ const addFlavour = function(name, props) {
   );
 };
 
+const teardown = function() {
+  const proto = this.ComponentToUse.prototype;
+
+  Object.getOwnPropertyNames(proto).forEach(method => {
+    restoreSpy(proto[method]);
+  });
+
+  return this;
+};
+
 const testerMethods = {
   use,
   addFlavour,
+  teardown,
 };
 
 // STAMP
