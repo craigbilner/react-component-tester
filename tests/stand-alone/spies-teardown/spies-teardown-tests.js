@@ -3,50 +3,47 @@ import SpiesTeardown from './spies-teardown';
 import ReactTester from '../../../src/index';
 
 describe('spies teardown', () => {
-  let component;
+  let tester;
 
   beforeEach(() => {
-    component = ReactTester
+    tester = ReactTester
       .create()
       .use(SpiesTeardown);
   });
 
-  describe('refreshes spies each time', () => {
-    beforeEach(() => {
-      component
-        .addFlavour('lemon', {});
+  describe('refresh spies each time should', () => {
+    beforeEach(() => tester.addFlavour('LEMON', {}));
+
+    it('allow normal spy behaviour on the first test pass', () => {
+      const actual = tester.ComponentToUse.prototype.spiedOn.callCount;
+      const expected = 1;
+
+      assert(actual, expected);
     });
 
-    it('is called once the first time I check', () => {
-      const callcount = component.ComponentToUse.prototype.spiedOn.callCount;
+    it('allow normal spy behaviour on the second test pass', () => {
+      const actual = tester.ComponentToUse.prototype.spiedOn.callCount;
+      const expected = 1;
 
-      assert(callcount, 1);
-    });
-
-    it('is called once the second time I check', () => {
-      const callcount = component.ComponentToUse.prototype.spiedOn.callCount;
-
-      assert(callcount, 1);
+      assert(actual, expected);
     });
   });
 
-  describe('allows me to tear down when I want to', () => {
-    beforeEach(() => {
-      component
-        .addFlavour('chocolate', {});
+  describe('should', () => {
+    beforeEach(() => tester.addFlavour('CHOCOLATE', {}));
+
+    it('add spies automatically', () => {
+      const actual = tester.ComponentToUse.prototype.spiedOn.isSinonProxy;
+      const expected = true;
+      assert(actual, expected);
     });
 
-    it('spies automatically', () => {
-      const isSpy = component.ComponentToUse.prototype.spiedOn.isSinonProxy;
+    it('allow them to be unwrapped', () => {
+      tester.teardown();
+      const actual = typeof tester.ComponentToUse.prototype.spiedOn.isSinonProxy;
+      const expected = 'undefined';
 
-      assert(isSpy, true);
-    });
-
-    it('can be unwrapped', () => {
-      component.teardown();
-      const isSpy = typeof component.ComponentToUse.prototype.spiedOn.isSinonProxy;
-
-      assert(isSpy, 'undefined');
+      assert(actual, expected);
     });
   });
 });
