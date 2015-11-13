@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class spiesTeardown extends Component {
+export default class SpiesTeardown extends Component {
 
   spiedOn() {
     return 'foo';
