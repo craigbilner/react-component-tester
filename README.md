@@ -1,13 +1,13 @@
 # react component tester
 
-because testing components with shallow rendering is fantastic...but can be a bit of a pain
+because testing components with shallow rendering is fantastic...but can be a bit of a pain and other testing libraries focus on finding components rather than providing an opinionated way of testing them, including their state.
 
 # requirements
 
 * test a component quickly (~5ms per test)
 * test the style of components easily
 * test the props of child components easily
-* test various "flavours" of props succinctly
+* test various "flavours" of props succinctly in a consistent uniform manner
 * find child components easily in a non-brittle manner
 * test prop wire-up on smart components
 * test changes of state of smart components
