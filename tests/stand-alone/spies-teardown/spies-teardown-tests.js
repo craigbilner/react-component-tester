@@ -18,14 +18,14 @@ describe('spies teardown', () => {
       const actual = tester.ComponentToUse.prototype.spiedOn.callCount;
       const expected = 1;
 
-      assert(actual, expected);
+      assert.deepEqual(actual, expected);
     });
 
     it('allow normal spy behaviour on the second test pass', () => {
       const actual = tester.ComponentToUse.prototype.spiedOn.callCount;
       const expected = 1;
 
-      assert(actual, expected);
+      assert.deepEqual(actual, expected);
     });
   });
 
@@ -35,7 +35,7 @@ describe('spies teardown', () => {
     it('add spies automatically', () => {
       const actual = tester.ComponentToUse.prototype.spiedOn.isSinonProxy;
       const expected = true;
-      assert(actual, expected);
+      assert.deepEqual(actual, expected);
     });
 
     it('allow them to be unwrapped', () => {
@@ -43,7 +43,7 @@ describe('spies teardown', () => {
       const actual = typeof tester.ComponentToUse.prototype.spiedOn.isSinonProxy;
       const expected = 'undefined';
 
-      assert(actual, expected);
+      assert.deepEqual(actual, expected);
     });
   });
 });
