@@ -4,6 +4,15 @@ const React = require('react');
 const TestUtils = require('react-addons-test-utils');
 const sinon = require('sinon');
 
+const defaultConfig = {
+  spyOnDefault: true,
+  spyOn: {
+    constructor: false,
+    componentWillUnmount: false,
+    render: false,
+  },
+};
+
 // FLAVOUR COMPONENT
 
 // METHODS
@@ -152,8 +161,9 @@ const flavour = stampit()
 // TESTER
 
 // INIT
-const testerInit = function() {
+const testerInit = function(opts) {
   this.ComponentToUse = null;
+  this.config = opts.instance;
 };
 
 // METHODS
@@ -163,25 +173,20 @@ const restoreSpy = function(method) {
   }
 };
 
-const defaultUseOptions = {
-  spyOnDefault: true,
-  spyOn: {
-    constructor: false,
-    componentWillUnmount: false,
-    render: false,
-  },
-};
+const use = function(Component) {
+  const options = _.merge(defaultConfig, this.config);
 
-const use = function(Component, opts) {
-  const options = _.merge(defaultUseOptions, opts);
   Object.getOwnPropertyNames(Component.prototype).forEach(method => {
     if (options.spyOn[method] === false) return;
+
     if (options.spyOnDefault || options.spyOn[method]) {
       restoreSpy(Component.prototype[method]);
       sinon.spy(Component.prototype, method);
     }
   });
+
   this.ComponentToUse = Component;
+
   return this;
 };
 
