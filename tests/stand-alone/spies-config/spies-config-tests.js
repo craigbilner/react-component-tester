@@ -11,7 +11,7 @@ describe('spies config', () => {
       if (!componentMethod) return;
       const actual = componentMethod.isSinonProxy;
       const expected = undefined;
-      assert.equal(actual, expected, `${method} should never be spied`);
+      assert.deepEqual(actual, expected, `${method} should never be spied`);
     };
 
     afterEach(() => {
@@ -26,7 +26,7 @@ describe('spies config', () => {
       tester.addFlavour('CHOCOLATE', {});
       const actual = tester.ComponentToUse.prototype.spiedOn.isSinonProxy;
       const expected = true;
-      assert.equal(actual, expected);
+      assert.deepEqual(actual, expected);
     });
 
     it('allow explicitly disabling specific spies', () => {
@@ -34,7 +34,7 @@ describe('spies config', () => {
       tester.addFlavour('CHOCOLATE', {});
       const actual = tester.ComponentToUse.prototype.spiedOn.isSinonProxy;
       const expected = undefined;
-      assert.equal(actual, expected);
+      assert.deepEqual(actual, expected);
     });
 
     it('allow disabling all spies', () => {
@@ -42,7 +42,7 @@ describe('spies config', () => {
       tester.addFlavour('CHOCOLATE', {});
       const actual = tester.ComponentToUse.prototype.spiedOn.isSinonProxy;
       const expected = undefined;
-      assert.equal(actual, expected);
+      assert.deepEqual(actual, expected);
     });
 
     it('allow explicitly enabling specific spies', () => {
@@ -50,7 +50,7 @@ describe('spies config', () => {
       tester.addFlavour('CHOCOLATE', {});
       const actual = tester.ComponentToUse.prototype.spiedOn.isSinonProxy;
       const expected = true;
-      assert.equal(actual, expected);
+      assert.deepEqual(actual, expected);
     });
   });
 });
