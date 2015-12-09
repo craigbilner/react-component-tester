@@ -2,23 +2,22 @@ import assert from 'assert';
 import SpiesConfig from './spies-config';
 import ReactTester from '../../../src/index';
 
-describe.only('spies config', () => {
+describe('spies config', () => {
   describe('should', () => {
     let tester;
 
-    afterEach(() => {
-      const actual = tester.ComponentToUse.prototype.constructor.isSinonProxy;
+    const shouldNeverBeSpied = (method) => {
+      const componentMethod = tester.ComponentToUse.prototype[method];
+      if (!componentMethod) return;
+      const actual = componentMethod.isSinonProxy;
       const expected = undefined;
-      assert.equal(actual, expected, 'constructor should never be spied');
-    });
+      assert.equal(actual, expected, `${method} should never be spied`);
+    };
 
     afterEach(() => {
-      const actual = tester.ComponentToUse.prototype.render.isSinonProxy;
-      const expected = undefined;
-      assert.equal(actual, expected, 'render should never be spied');
-    });
-
-    afterEach(() => {
+      shouldNeverBeSpied('constructor');
+      shouldNeverBeSpied('render');
+      shouldNeverBeSpied('componentWillUnmount');
       tester.teardown();
     });
 
