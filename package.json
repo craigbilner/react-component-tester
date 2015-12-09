@@ -7,10 +7,10 @@
     "build:test": "webpack --config ./tests/webpack.config.test.js",
     "build:testrig": "npm run build:test && open ./tests/index.html",
     "watch:testrig": "npm run build:test -- --progress --colors --watch",
-    "test": "istanbul cover _mocha -- --compilers js:babel/register ./tests/**/*tests.js && cat ./coverage/lcov.info | coveralls",
-    "posttest": "npm run lint",
+    "test": "istanbul cover _mocha -- --compilers js:babel/register ./tests/**/*tests.js",
+    "posttest": "npm run lint && cat ./coverage/lcov.info | coveralls",
     "test:spec": "mocha ./tests/stand-alone/unordered-list/unordered-list-tests.js --compilers js:babel/register",
-    "lint": "eslint ."
+    "lint": "eslint ./src ./tests ./index.js"
   },
   "repository": {
     "type": "git",
