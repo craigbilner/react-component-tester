@@ -163,10 +163,20 @@ const restoreSpy = function(method) {
   }
 };
 
-const use = function(Component) {
-  const ignore = ['constructor', 'componentWillUnmount', 'render'];
+const defaultUseOptions = {
+  spyOnDefault: true,
+  spyOn: {
+    constructor: false,
+    componentWillUnmount: false,
+    render: false,
+  },
+};
+
+const use = function(Component, opts) {
+  const options = _.merge(defaultUseOptions, opts);
   Object.getOwnPropertyNames(Component.prototype).forEach(method => {
-    if (!~ignore.indexOf(method)) {
+    if (options.spyOn[method] === false) return;
+    if (options.spyOnDefault || options.spyOn[method]) {
       restoreSpy(Component.prototype[method]);
       sinon.spy(Component.prototype, method);
     }
