@@ -145,3 +145,19 @@ each returned component will have a type
 ### value{string}
 
 if a component doesn't have any children, it's content will be added as the value property
+
+## config
+
+all methods are spied on by default, if for some reason you would like to remove them you can pass it in the config on create
+
+    ReactTester.create({
+        spyOnDefault: false,
+        spyOn: {
+            someMethod: false,
+        },
+    }).use(SomeComponent);
+    
+You can either pass:
+
+* `spyOnDefault` as false to disable all spies
+* a `spyOn` config to disable per method 
