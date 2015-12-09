@@ -40,6 +40,7 @@ then the flavour can be tested on, here the NONE flavour's type is checked
 
     const actual = NONE.type;
     const expected = 'div';
+    
     assert.deepEqual(actual, expected);
 
 ## methods
@@ -148,7 +149,7 @@ if a component doesn't have any children, it's content will be added as the valu
 
 ## config
 
-all methods are spied on by default, if for some reason you would like to remove them you can pass it in the config on create
+all methods are spied on by default, if for some reason you would like to remove them you can pass a config on create
 
     ReactTester.create({
         spyOnDefault: false,

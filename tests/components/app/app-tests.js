@@ -29,6 +29,7 @@ describe('app should', () => {
   it('render as a div', () => {
     const actual = NONE.type;
     const expected = 'div';
+
     assert.deepEqual(actual, expected);
   });
 
