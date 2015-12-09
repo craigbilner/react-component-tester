@@ -6,11 +6,13 @@ const sinon = require('sinon');
 
 const defaultConfig = {
   spyOnDefault: true,
-  spyOn: {
-    constructor: false,
-    componentWillUnmount: false,
-    render: false,
-  },
+  spyOn: {},
+};
+
+const doNotSpyOn = {
+  constructor: false,
+  componentWillUnmount: false,
+  render: false,
 };
 
 // FLAVOUR COMPONENT
@@ -163,7 +165,11 @@ const flavour = stampit()
 // INIT
 const testerInit = function(opts) {
   this.ComponentToUse = null;
-  this.config = opts.instance;
+
+  this.config = {
+    spyOnDefault: opts.instance.spyOnDefault,
+    spyOn: opts.instance.spyOn,
+  };
 };
 
 // METHODS
@@ -174,7 +180,7 @@ const restoreSpy = function(method) {
 };
 
 const use = function(Component) {
-  const options = _.merge(defaultConfig, this.config);
+  const options = _.merge({}, defaultConfig, this.config, {spyOn: doNotSpyOn});
 
   Object.getOwnPropertyNames(Component.prototype).forEach(method => {
     if (options.spyOn[method] === false) return;

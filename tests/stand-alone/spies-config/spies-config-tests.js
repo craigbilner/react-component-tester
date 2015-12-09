@@ -45,8 +45,8 @@ describe('spies config', () => {
 
       tester.addFlavour('CHOCOLATE', {});
 
-      const actual = tester.ComponentToUse.prototype.spiedOn.isSinonProxy;
-      const expected = undefined;
+      const actual = !!tester.ComponentToUse.prototype.spiedOn.isSinonProxy;
+      const expected = false;
 
       assert.deepEqual(actual, expected);
     });
@@ -58,8 +58,8 @@ describe('spies config', () => {
 
       tester.addFlavour('CHOCOLATE', {});
 
-      const actual = tester.ComponentToUse.prototype.spiedOn.isSinonProxy;
-      const expected = undefined;
+      const actual = !!tester.ComponentToUse.prototype.spiedOn.isSinonProxy;
+      const expected = false;
 
       assert.deepEqual(actual, expected);
     });
@@ -74,8 +74,24 @@ describe('spies config', () => {
 
       tester.addFlavour('CHOCOLATE', {});
 
-      const actual = tester.ComponentToUse.prototype.spiedOn.isSinonProxy;
+      const actual = !!tester.ComponentToUse.prototype.spiedOn.isSinonProxy;
       const expected = true;
+
+      assert.deepEqual(actual, expected);
+    });
+
+    it('does not allow overriding render', () => {
+      tester = ReactTester.create({
+        spyOnDefault: false,
+        spyOn: {
+          render: true,
+        },
+      }).use(SpiesConfig);
+
+      tester.addFlavour('CHOCOLATE', {});
+
+      const actual = !!tester.ComponentToUse.prototype.render.isSinonProxy;
+      const expected = false;
 
       assert.deepEqual(actual, expected);
     });
