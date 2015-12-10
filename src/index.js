@@ -27,9 +27,8 @@ const propFunc = function(propToTest) {
 const mapsTo = function(method) {
   const symbolToTest = Symbol(method);
   this.props[this.propToTest](symbolToTest);
-  const reactClass = this.reactClass || this.parentComponent.reactClass;
 
-  return reactClass.prototype[method].lastCall.args.indexOf(symbolToTest) > -1;
+  return this.reactClass.prototype[method].lastCall.args.indexOf(symbolToTest) > -1;
 };
 
 const flavourComponentMethods = {
@@ -57,17 +56,18 @@ const flavourComponent = stampit()
 
 /* eslint-disable no-use-before-define */
 const reduceChildren =
-  function(parentComponent, parentIndx, childMap, child, indx) {
+  function(parentComponent, reactClass, parentIndx, childMap, child, indx) {
     const childIsElement = TestUtils.isElement(child);
     const id = parseInt(parentIndx, 10) >= 0 ? parentIndx + '.' + indx : indx;
 
     if (childIsElement) {
-      childMap[id] = flavourComponent(_.assign({}, child, {parentComponent}));
+      childMap[id] = flavourComponent(_.assign({}, child, {parentComponent, reactClass}));
 
       _.assign(
         childMap,
         convertAndReduce(
           parentComponent,
+          reactClass,
           child.props.children,
           id
         )
@@ -82,12 +82,12 @@ const reduceChildren =
   };
 /* eslint-enable no-use-before-define */
 
-const convertAndReduce = function(parentComponent, children, parentIndx) {
+const convertAndReduce = function(parentComponent, reactClass, children, parentIndx) {
   return React
     .Children
     .toArray(children)
     .reduce(
-      reduceChildren.bind(null, parentComponent, parentIndx),
+      reduceChildren.bind(null, parentComponent, reactClass, parentIndx),
       {}
     );
 };
@@ -114,7 +114,7 @@ const flavourInit = function(opts) {
     }
 
     this.type = output.type;
-    this.childMap = convertAndReduce(this.component, output.props.children);
+    this.childMap = convertAndReduce(this.component, opts.instance.reactClass, output.props.children);
   } else {
     this.type = output;
     this.childMap = [];
