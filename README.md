@@ -1,7 +1,8 @@
 [![Circle CI](https://circleci.com/gh/craigbilner/react-component-tester/tree/master.svg?style=svg)](https://circleci.com/gh/craigbilner/react-component-tester/tree/master)
 [![Coverage Status](https://coveralls.io/repos/craigbilner/react-component-tester/badge.svg?branch=master&service=github)](https://coveralls.io/github/craigbilner/react-component-tester?branch=master)
 ![dependencies](https://david-dm.org/craigbilner/react-component-tester.svg)
-
+[![npm Version](https://img.shields.io/npm/v/react-component-tester.svg)](https://www.npmjs.com/package/react-component-tester)
+[![License](https://img.shields.io/npm/l/react-component-tester.svg)](https://www.npmjs.com/package/react-component-tester)
 
 # react component tester
 
