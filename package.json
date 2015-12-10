@@ -9,7 +9,8 @@
     "watch:testrig": "npm run build:test -- --progress --colors --watch",
     "test": "istanbul cover _mocha -- --compilers js:babel/register ./tests/**/*tests.js",
     "posttest": "npm run lint && cat ./coverage/lcov.info | coveralls",
-    "test:spec": "mocha ./tests/stand-alone/unordered-list/unordered-list-tests.js --compilers js:babel/register",
+    "test:simple": "mocha ./tests/**/*tests.js --compilers js:babel/register",
+    "test:spec": "mocha ./tests/stand-alone/bad-components/multi-root --compilers js:babel/register",
     "lint": "eslint ./src ./tests ./index.js"
   },
   "repository": {

@@ -109,6 +109,10 @@ const flavourInit = function(opts) {
   this.component = flavourComponent(_.assign({}, output, {reactClass: opts.instance.reactClass}));
 
   if (output) {
+    if (!output.props) {
+      throw new Error('a react component must return one root element');
+    }
+
     this.type = output.type;
     this.childMap = convertAndReduce(this.component, output.props.children);
   } else {
