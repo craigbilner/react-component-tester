@@ -1,6 +1,6 @@
 {
   "name": "react-component-tester",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "A simple helper to make testing react components with shallow rendering easier",
   "main": "index.js",
   "scripts": {
