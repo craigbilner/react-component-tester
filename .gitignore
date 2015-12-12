@@ -3,3 +3,4 @@ node_modules
 tests/index.min*
 npm-debug.log
 coverage
+.DS_Store

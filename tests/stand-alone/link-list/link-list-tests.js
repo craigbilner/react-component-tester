@@ -3,7 +3,7 @@ import LinkListComponent from './link-list';
 import Link from './link';
 import ReactTester from '../../../src/index';
 
-describe.only('the LinkListComponent should', () => {
+describe('the LinkListComponent should', () => {
   const tester = ReactTester.create().use(LinkListComponent);
   const THREE_LINKS = tester.addFlavour('THREE_LINKS', {
     links: [
@@ -22,6 +22,13 @@ describe.only('the LinkListComponent should', () => {
   it('render three links if given an array of three items', () => {
     const actual = THREE_LINKS.countComponents(Link);
     const expected = 3;
+
+    assert.deepEqual(actual, expected);
+  });
+
+  it('contain no div elements', () => {
+    const actual = THREE_LINKS.findComponents('div');
+    const expected = [];
 
     assert.deepEqual(actual, expected);
   });
