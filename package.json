@@ -11,7 +11,8 @@
     "posttest": "npm run lint && cat ./coverage/lcov.info | coveralls",
     "test:simple": "mocha ./tests/**/*tests.js --compilers js:babel-core/register",
     "test:spec": "mocha ./tests/stand-alone/link-list/link-list-tests --compilers js:babel-core/register",
-    "lint": "eslint ./src ./tests ./index.js"
+    "lint": "eslint ./src ./tests ./index.js",
+    "preinstall": "npm uninstall babel"
   },
   "repository": {
     "type": "git",
