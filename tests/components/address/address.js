@@ -1,7 +1,7 @@
 import React from 'react';
 import AddressLine from '../address-line/address-line';
 
-export default ({address = [], addressee = ''}) => (
+export default ({ address = [], addressee = '' }) => (
   <div>
     <AddressLine text={addressee} />
     {

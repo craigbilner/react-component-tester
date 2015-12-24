@@ -17,17 +17,17 @@ export default class StampSmartComponent extends Component {
     let nextType;
 
     switch (currentType) {
-      case types.NONE:
-        nextType = types.FIRST_CLASS;
-        break;
-      case types.FIRST_CLASS:
-        nextType = types.SECOND_CLASS;
-        break;
-      case types.SECOND_CLASS:
-        nextType = types.NONE;
-        break;
-      default:
-        nextType = types.NONE;
+    case types.NONE:
+      nextType = types.FIRST_CLASS;
+      break;
+    case types.FIRST_CLASS:
+      nextType = types.SECOND_CLASS;
+      break;
+    case types.SECOND_CLASS:
+      nextType = types.NONE;
+      break;
+    default:
+      nextType = types.NONE;
     }
 
     return nextType;
@@ -45,7 +45,7 @@ export default class StampSmartComponent extends Component {
         types={stampTypes}
         type={this.state.type}
         onClick={this.handleOnClick.bind(this)}
-        />
+      />
     );
   }
 }
