@@ -43,10 +43,10 @@ export default class UnorderedListComponent extends Component {
       <ul className="class-1" onClick={this.handleOnClick}>
         <li className="class-2">
           <a href="some-href-1"
-             title={i18n.help}
-             target="_blank"
-             rel="help"
-             onKeyPress={this.handleKeyPress}
+            title={i18n.help}
+            target="_blank"
+            rel="help"
+            onKeyPress={this.handleKeyPress}
           >
             {i18n.help}
           </a>

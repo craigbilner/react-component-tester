@@ -19,12 +19,12 @@ const doNotSpyOn = {
 
 // METHODS
 
-const propFunc = function(propToTest) {
+const propFunc = function (propToTest) {
   this.propToTest = propToTest;
   return this;
 };
 
-const mapsTo = function(method) {
+const mapsTo = function (method) {
   const symbolToTest = Symbol(method);
   this.props[this.propToTest](symbolToTest);
 
@@ -36,7 +36,7 @@ const flavourComponentMethods = {
   mapsTo,
 };
 
-const flavourComponentInit = function(opts) {
+const flavourComponentInit = function (opts) {
   if (opts.instance.props) {
     this.style = opts.instance.props.style;
 
@@ -56,12 +56,12 @@ const flavourComponent = stampit()
 
 /* eslint-disable no-use-before-define */
 const reduceChildren =
-  function(parentComponent, reactClass, parentIndx, childMap, child, indx) {
+  function (parentComponent, reactClass, parentIndx, childMap, child, indx) {
     const childIsElement = TestUtils.isElement(child);
     const id = parseInt(parentIndx, 10) >= 0 ? parentIndx + '.' + indx : indx;
 
     if (childIsElement) {
-      childMap[id] = flavourComponent(_.assign({}, child, {parentComponent, reactClass}));
+      childMap[id] = flavourComponent(_.assign({}, child, { parentComponent, reactClass }));
 
       _.assign(
         childMap,
@@ -82,7 +82,7 @@ const reduceChildren =
   };
 /* eslint-enable no-use-before-define */
 
-const convertAndReduce = function(parentComponent, reactClass, children, parentIndx) {
+const convertAndReduce = function (parentComponent, reactClass, children, parentIndx) {
   return React
     .Children
     .toArray(children)
@@ -92,7 +92,7 @@ const convertAndReduce = function(parentComponent, reactClass, children, parentI
     );
 };
 
-const reduceTypes = function(childMap, typeMap, key) {
+const reduceTypes = function (childMap, typeMap, key) {
   const components = (typeMap.get(childMap[key].type) || []).slice(0);
   components.push(childMap[key]);
 
@@ -101,12 +101,12 @@ const reduceTypes = function(childMap, typeMap, key) {
   return typeMap;
 };
 
-const flavourInit = function(opts) {
+const flavourInit = function (opts) {
   const output = opts.instance.shallowRenderer.getRenderOutput();
 
   this.initialState = _.assign({}, opts.instance.shallowRenderer._instance._instance.state);
   this.state = _.assign({}, this.initialState);
-  this.component = flavourComponent(_.assign({}, output, {reactClass: opts.instance.reactClass}));
+  this.component = flavourComponent(_.assign({}, output, { reactClass: opts.instance.reactClass }));
 
   if (output) {
     if (!output.props) {
@@ -132,23 +132,23 @@ const flavourInit = function(opts) {
   // console.log('typeMap', this.typeMap);
 };
 
-const resetState = function() {
+const resetState = function () {
   this.shallowRenderer._instance._instance.state = _.assign({}, this.initialState);
 };
 
-const getState = function() {
+const getState = function () {
   return this.shallowRenderer._instance._instance.state;
 };
 
-const findChild = function(path) {
+const findChild = function (path) {
   return this.childMap[path];
 };
 
-const findComponents = function(component) {
+const findComponents = function (component) {
   return this.typeMap.get(component) || [];
 };
 
-const countComponents = function(component) {
+const countComponents = function (component) {
   return this.findComponents(component).length;
 };
 
@@ -167,7 +167,7 @@ const flavour = stampit()
 // TESTER
 
 // INIT
-const testerInit = function(opts) {
+const testerInit = function (opts) {
   this.ComponentToUse = null;
 
   this.config = {
@@ -177,14 +177,14 @@ const testerInit = function(opts) {
 };
 
 // METHODS
-const restoreSpy = function(method) {
+const restoreSpy = function (method) {
   if (method.isSinonProxy) {
     method.restore();
   }
 };
 
-const use = function(Component) {
-  const options = _.merge({}, defaultConfig, this.config, {spyOn: doNotSpyOn});
+const use = function (Component) {
+  const options = _.merge({}, defaultConfig, this.config, { spyOn: doNotSpyOn });
 
   Object.getOwnPropertyNames(Component.prototype).forEach(method => {
     if (options.spyOn[method] === false) return;
@@ -200,7 +200,7 @@ const use = function(Component) {
   return this;
 };
 
-const createFlavour = function(name, reactClass, shallowRenderer) {
+const createFlavour = function (name, reactClass, shallowRenderer) {
   return flavour({
     name,
     reactClass,
@@ -208,7 +208,7 @@ const createFlavour = function(name, reactClass, shallowRenderer) {
   });
 };
 
-const getShallowRenderer = function(component, props) {
+const getShallowRenderer = function (component, props) {
   const shallowRenderer = TestUtils.createRenderer();
 
   shallowRenderer
@@ -220,7 +220,7 @@ const getShallowRenderer = function(component, props) {
   return shallowRenderer;
 };
 
-const addFlavour = function(name, props) {
+const addFlavour = function (name, props) {
   return createFlavour(
     name,
     this.ComponentToUse,
@@ -228,7 +228,7 @@ const addFlavour = function(name, props) {
   );
 };
 
-const teardown = function() {
+const teardown = function () {
   const proto = this.ComponentToUse.prototype;
 
   Object.getOwnPropertyNames(proto).forEach(method => {

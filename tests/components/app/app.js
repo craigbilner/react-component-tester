@@ -20,7 +20,7 @@ export default radium(({
           signature={signature}
           addressee={addressee}
           address={address}
-          />
+        />
       </div>
     </div>
     <div style={styles.gutter}></div>

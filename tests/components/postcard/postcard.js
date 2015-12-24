@@ -7,20 +7,20 @@ import Signature from '../signature/signature';
 import Stamp from '../stamp/stamp-smart';
 import Address from '../address/address';
 
-export default radium(({comingFrom, message, signature, address, addressee}) => (
+export default radium(({ comingFrom, message, signature, address, addressee }) => (
   <div style={styles.comp}>
     <div style={styles.left}>
       <Welcome
         text={comingFrom}
-        />
+      />
       <Message
         text={message}
-        />
+      />
 
       <div style={styles.signatureContainer}>
         <Signature
           text={signature}
-          />
+        />
       </div>
     </div>
     <div style={styles.right}>
@@ -31,7 +31,7 @@ export default radium(({comingFrom, message, signature, address, addressee}) => 
         <Address
           addressee={addressee}
           address={address}
-          />
+        />
       </div>
     </div>
   </div>

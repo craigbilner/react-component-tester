@@ -19,10 +19,9 @@ const address = [
 ];
 
 ReactDOM.render(<App
-    comingFrom={comingFrom}
-    message={message}
-    signature={signature}
-    addressee={addressee}
-    address={address}
-  />, document.getElementById('root'));
-
+  comingFrom={comingFrom}
+  message={message}
+  signature={signature}
+  addressee={addressee}
+  address={address}
+/>, document.getElementById('root'));
