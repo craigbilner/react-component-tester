@@ -11,6 +11,8 @@ export default class StampSmartComponent extends Component {
     this.state = props.state || {
         type: stampTypes.NONE,
       };
+
+    this.handleOnClick = this.handleOnClick.bind(this);
   }
 
   getNextStampType(types, currentType) {
@@ -44,7 +46,7 @@ export default class StampSmartComponent extends Component {
       <Stamp
         types={stampTypes}
         type={this.state.type}
-        onClick={this.handleOnClick.bind(this)}
+        onClick={this.handleOnClick}
       />
     );
   }
