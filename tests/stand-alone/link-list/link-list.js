@@ -4,6 +4,10 @@ import Link from './link';
 export default class LinkListComponent extends Component {
   constructor(props) {
     super(props);
+
+    this.handleLink1Click = this.handleLink1Click.bind(this);
+    this.handleLink2Click = this.handleLink1Click.bind(this);
+    this.handleLink3Click = this.handleLink1Click.bind(this);
   }
 
   handleLink1Click() {
@@ -22,13 +26,13 @@ export default class LinkListComponent extends Component {
     const { links } = this.props;
     return (
       <ul>
-        <li key="0" onClick={this.handleLink1Click.bind(this)}>
+        <li key="0" onClick={this.handleLink1Click}>
           <Link text={links[0].text}/>
         </li>
-        <li key="1" onClick={this.handleLink2Click.bind(this)}>
+        <li key="1" onClick={this.handleLink2Click}>
           <Link text={links[1].text}/>
         </li>
-        <li key="2" onClick={this.handleLink3Click.bind(this)}>
+        <li key="2" onClick={this.handleLink3Click}>
           <Link text={links[2].text}/>
         </li>
       </ul>

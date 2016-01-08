@@ -57,14 +57,15 @@ const flavourComponent = stampit()
 /* eslint-disable no-use-before-define */
 const reduceChildren =
   function (parentComponent, reactClass, parentIndx, childMap, child, indx) {
+    const thisMap = _.assign({}, childMap);
     const childIsElement = TestUtils.isElement(child);
     const id = parseInt(parentIndx, 10) >= 0 ? parentIndx + '.' + indx : indx;
 
     if (childIsElement) {
-      childMap[id] = flavourComponent(_.assign({}, child, { parentComponent, reactClass }));
+      thisMap[id] = flavourComponent(_.assign({}, child, { parentComponent, reactClass }));
 
       _.assign(
-        childMap,
+        thisMap,
         convertAndReduce(
           parentComponent,
           reactClass,
@@ -73,12 +74,12 @@ const reduceChildren =
         )
       );
     } else {
-      childMap[id] = {
+      thisMap[id] = {
         value: child,
       };
     }
 
-    return childMap;
+    return thisMap;
   };
 /* eslint-enable no-use-before-define */
 
@@ -114,7 +115,11 @@ const flavourInit = function (opts) {
     }
 
     this.type = output.type;
-    this.childMap = convertAndReduce(this.component, opts.instance.reactClass, output.props.children);
+    this.childMap = convertAndReduce(
+      this.component,
+      opts.instance.reactClass,
+      output.props.children
+    );
   } else {
     this.type = output;
     this.childMap = [];
