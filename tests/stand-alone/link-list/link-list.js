@@ -6,8 +6,8 @@ export default class LinkListComponent extends Component {
     super(props);
 
     this.handleLink1Click = this.handleLink1Click.bind(this);
-    this.handleLink2Click = this.handleLink1Click.bind(this);
-    this.handleLink3Click = this.handleLink1Click.bind(this);
+    this.handleLink2Click = this.handleLink2Click.bind(this);
+    this.handleLink3Click = this.handleLink3Click.bind(this);
   }
 
   handleLink1Click() {
