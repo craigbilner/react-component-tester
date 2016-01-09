@@ -55,7 +55,7 @@
   "dependencies": {
     "lodash": "3.10.1",
     "react": "0.14.6",
-    "react-addons-test-utils": "0.14.5",
+    "react-addons-test-utils": "0.14.6",
     "sinon": "1.17.2",
     "stampit": "2.1.1"
   }
