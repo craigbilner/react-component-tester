@@ -62,7 +62,14 @@ const reduceChildren =
     const id = parseInt(parentIndx, 10) >= 0 ? parentIndx + '.' + indx : indx;
 
     if (childIsElement) {
-      thisMap[id] = flavourComponent(_.assign({}, child, { parentComponent, reactClass }));
+      thisMap[id] = flavourComponent(_.assign(
+        {},
+        child,
+        {
+          parentComponent,
+          reactClass,
+        }
+      ));
 
       _.assign(
         thisMap,
@@ -107,7 +114,13 @@ const flavourInit = function (opts) {
 
   this.initialState = _.assign({}, opts.instance.shallowRenderer._instance._instance.state);
   this.state = _.assign({}, this.initialState);
-  this.component = flavourComponent(_.assign({}, output, { reactClass: opts.instance.reactClass }));
+  this.component = flavourComponent(_.assign(
+    {},
+    output,
+    {
+      reactClass: opts.instance.reactClass,
+    }
+  ));
 
   if (output) {
     if (!output.props) {
@@ -189,7 +202,14 @@ const restoreSpy = function (method) {
 };
 
 const use = function (Component) {
-  const options = _.merge({}, defaultConfig, this.config, { spyOn: doNotSpyOn });
+  const options = _.merge(
+    {},
+    defaultConfig,
+    this.config,
+    {
+      spyOn: doNotSpyOn,
+    }
+  );
 
   Object.getOwnPropertyNames(Component.prototype).forEach(method => {
     if (options.spyOn[method] === false) return;
@@ -215,12 +235,20 @@ const createFlavour = function (name, reactClass, shallowRenderer) {
 
 const getShallowRenderer = function (component, props) {
   const shallowRenderer = TestUtils.createRenderer();
+  const context = {};
+
+  const componentWithProps = React.createElement(component, props);
+
+  if (componentWithProps.type.contextTypes && componentWithProps.type.contextTypes._radiumConfig) {
+    context._radiumConfig = () => {
+    };
+    context._radiumConfig.plugins = [];
+
+    componentWithProps.type.contextTypes._radiumConfig = context._radiumConfig;
+  }
 
   shallowRenderer
-    .render(React.createElement(
-      component,
-      props
-    ));
+    .render(componentWithProps, context);
 
   return shallowRenderer;
 };
