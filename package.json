@@ -53,7 +53,7 @@
     "webpack": "1.12.10"
   },
   "dependencies": {
-    "lodash": "3.10.1",
+    "lodash": "4.0.0",
     "react": "0.14.6",
     "react-addons-test-utils": "0.14.6",
     "sinon": "1.17.2",
