@@ -10,7 +10,7 @@
     "test": "babel-node ./node_modules/istanbul/lib/cli cover _mocha ./tests/**/*tests.js",
     "posttest": "npm run lint && cat ./coverage/lcov.info | coveralls",
     "test:simple": "mocha ./tests/**/*tests.js --compilers js:babel-core/register",
-    "test:spec": "mocha ./tests/stand-alone/link-list/link-list-tests --compilers js:babel-core/register",
+    "test:spec": "mocha ./tests/components/address-line --compilers js:babel-core/register",
     "lint": "eslint ./src ./tests ./index.js"
   },
   "repository": {
@@ -48,7 +48,7 @@
     "eslint-plugin-react": "3.14.0",
     "istanbul": "0.4.1",
     "mocha": "2.3.4",
-    "radium": "0.15.3",
+    "radium": "0.16.2",
     "react-dom": "0.14.6",
     "webpack": "1.12.10"
   },
