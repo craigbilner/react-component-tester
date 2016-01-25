@@ -1,5 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+import { StyleRoot } from 'radium';
 import App from './components/app/app';
 
 const comingFrom = 'Welcome from some sort of React holiday';
@@ -23,10 +24,14 @@ const address = [
   'ID8 9JD',
 ];
 
-ReactDOM.render(<App
-  comingFrom={comingFrom}
-  message={message}
-  signature={signature}
-  addressee={addressee}
-  address={address}
-/>, document.getElementById('root'));
+render(
+  <StyleRoot>
+    <App
+      comingFrom={comingFrom}
+      message={message}
+      signature={signature}
+      addressee={addressee}
+      address={address}
+    />
+  </StyleRoot>
+  , document.getElementById('root'));
