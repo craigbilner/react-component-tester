@@ -59,7 +59,7 @@ const reduceChildren =
   function (parentComponent, reactClass, parentIndx, childMap, child, indx) {
     const thisMap = _.assign({}, childMap);
     const childIsElement = TestUtils.isElement(child);
-    const id = parseInt(parentIndx, 10) >= 0 ? parentIndx + '.' + indx : indx;
+    const id = parseInt(parentIndx, 10) >= 0 ? `${parentIndx}.${indx}` : indx;
 
     if (childIsElement) {
       thisMap[id] = flavourComponent(_.assign(
@@ -240,7 +240,7 @@ const getShallowRenderer = function (component, props) {
   const componentWithProps = React.createElement(component, props);
 
   if (componentWithProps.type.contextTypes && componentWithProps.type.contextTypes._radiumConfig) {
-    context._radiumConfig = () => {
+    context._radiumConfig = function () {
     };
     context._radiumConfig.plugins = [];
 
