@@ -127,6 +127,7 @@ const isMapped =
         NONE
             .component
             .propFunc('onClick')
+            .withArgs({ test: 123 })
             .mapsTo('handleOnClick');
 
 assert(isMapped);
