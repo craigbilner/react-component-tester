@@ -110,15 +110,17 @@ const expected = stampTypes.FIRST_CLASS;
 assert.deepEqual(actual, expected);
 ```
 
-### .propFunc(propName{string}), .mapsTo(methodName{string}) => isMapped{boolean}
+### .propFunc(propName{string}), .withArgs(arguments{array}) [optional], .mapsTo(methodName{string}) => isMapped{boolean}
 
-propFunc takes a string which is the prop of a dumb component to which you are passing a function
+`propFunc` takes a string which is the prop of a dumb component to which you are passing a function
 
-mapTo takes a string which maps to the method on the smart component class
+`mapTo` takes a string which maps to the method on the smart component class
+
+if your `mapTo` method expects some specific arguments, these can be passed as an array using `withArgs`
 
 the returned value will be a boolean indicating if the given prop function maps to the expected class method
 
-here we test that the stamp dumb component was correctly given the smart component's handleOnClick method
+here we test that the stamp dumb component was correctly given the smart component's `handleOnClick` method
 
 ```javascript
 const isMapped =
