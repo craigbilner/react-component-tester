@@ -1,5 +1,10 @@
 # We're going through changes
 
+## 0.1.0 - 28 January, 2016
+
+* Add `withArgs` to help with `propFunc` `mapsTo`
+* Add defensive spy code and tidied methods to spy on
+
 ## 0.0.23 - 12 January, 2016
 
 * Fake context when using radium (after v0.16 breaking changes)
