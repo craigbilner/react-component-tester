@@ -114,9 +114,9 @@ assert.deepEqual(actual, expected);
 
 `propFunc` takes a string which is the prop of a dumb component to which you are passing a function
 
-`mapTo` takes a string which maps to the method on the smart component class
+`mapsTo` takes a string which maps to the method on the smart component class
 
-if your `mapTo` method expects some specific arguments, these can be passed as an array using `withArgs`
+if your `mapsTo` method expects some specific arguments, these can be passed as an array using `withArgs`
 
 the returned value will be a boolean indicating if the given prop function maps to the expected class method
 
