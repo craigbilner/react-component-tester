@@ -26,21 +26,29 @@ const propFunc = function (propToTest) {
   return this;
 };
 
+const withArgs = function () {
+  this.mapTestArgs = [].slice.call(arguments);
+  return this;
+};
+
 const mapsTo = function (method) {
   const symbolToTest = Symbol(method);
 
   this.reactClass.prototype[method].reset();
-  this.props[this.propToTest](symbolToTest);
+  this.props[this.propToTest].apply(this.reactClass, this.mapTestArgs.concat(symbolToTest));
 
   return this.reactClass.prototype[method].lastCall.args.indexOf(symbolToTest) > -1;
 };
 
 const flavourComponentMethods = {
   propFunc,
+  withArgs,
   mapsTo,
 };
 
 const flavourComponentInit = function (opts) {
+  this.mapTestArgs = [];
+
   if (opts.instance.props) {
     this.style = opts.instance.props.style;
 
