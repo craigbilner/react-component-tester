@@ -13,6 +13,8 @@ const doNotSpyOn = {
   constructor: false,
   componentWillUnmount: false,
   render: false,
+  getChildContext: false,
+  getNextStampType: false,
 };
 
 // FLAVOUR COMPONENT
@@ -26,6 +28,8 @@ const propFunc = function (propToTest) {
 
 const mapsTo = function (method) {
   const symbolToTest = Symbol(method);
+
+  this.reactClass.prototype[method].reset();
   this.props[this.propToTest](symbolToTest);
 
   return this.reactClass.prototype[method].lastCall.args.indexOf(symbolToTest) > -1;
