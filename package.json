@@ -48,7 +48,7 @@
     "eslint-plugin-react": "4.2.3",
     "istanbul": "0.4.2",
     "mocha": "2.4.5",
-    "radium": "0.16.5",
+    "radium": "0.17.0",
     "react-dom": "0.14.7",
     "webpack": "1.12.14"
   },
