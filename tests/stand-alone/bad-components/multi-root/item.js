@@ -1,3 +1,9 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
-export default ({ text }) => <a>{text}</a>;
+const Item = ({ text }) => <a>{text}</a>;
+
+Item.propTypes = {
+  text: PropTypes.string,
+};
+
+export default Item;

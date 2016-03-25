@@ -1,3 +1,9 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
-export default ({ text }) => <a>{text}</a>;
+const Link = ({ text }) => <a>{text}</a>;
+
+Link.propTypes = {
+  text: PropTypes.string,
+};
+
+export default Link;

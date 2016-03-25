@@ -27,13 +27,13 @@ export default class LinkListComponent extends Component {
     return (
       <ul>
         <li key="0" onClick={this.handleLink1Click}>
-          <Link text={links[0].text}/>
+          <Link text={links[0].text} />
         </li>
         <li key="1" onClick={this.handleLink2Click}>
-          <Link text={links[1].text}/>
+          <Link text={links[1].text} />
         </li>
         <li key="2" onClick={this.handleLink3Click}>
-          <Link text={links[2].text}/>
+          <Link text={links[2].text} />
         </li>
       </ul>
     );

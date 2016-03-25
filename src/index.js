@@ -135,10 +135,6 @@ const flavourInit = function (opts) {
   ));
 
   if (output) {
-    if (!output.props) {
-      throw new Error('a react component must return one root element');
-    }
-
     this.type = output.type;
     this.childMap = convertAndReduce(
       this.component,
@@ -259,8 +255,16 @@ const getShallowRenderer = function (component, props) {
     componentWithProps.type.contextTypes._radiumConfig = context._radiumConfig;
   }
 
-  shallowRenderer
-    .render(componentWithProps, context);
+  try {
+    shallowRenderer
+      .render(componentWithProps, context);
+  } catch (ex) {
+    if (ex.message === 'inst.render is not a function') {
+      throw new Error('a react component must return one root element');
+    } else {
+      throw ex;
+    }
+  }
 
   return shallowRenderer;
 };
