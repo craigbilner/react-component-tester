@@ -1,9 +1,8 @@
 /* eslint-disable indent */
-
-import React from 'react';
+import React, { PropTypes } from 'react';
 import styles from './stamp-styles';
 
-export default ({ types, type, onClick }) => (
+const StampDumb = ({ types, type, onClick }) => (
   <div style={styles.comp} onClick={onClick}>
     {
       (() => {
@@ -29,3 +28,11 @@ export default ({ types, type, onClick }) => (
     }
   </div>
 );
+
+StampDumb.propTypes = {
+  type: PropTypes.number,
+  types: PropTypes.object,
+  onClick: PropTypes.func,
+};
+
+export default StampDumb;

@@ -1,6 +1,6 @@
 import { Component } from 'react';
 
-export default class nullComponent extends Component {
+export default class NullComponent extends Component {
   render() {
     return null;
   }
