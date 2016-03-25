@@ -44,7 +44,7 @@
     "babel-preset-react": "6.3.13",
     "coveralls": "2.11.6",
     "eslint": "1.10.3",
-    "eslint-config-airbnb": "4.0.0",
+    "eslint-config-airbnb": "6.0.1",
     "eslint-plugin-react": "3.16.1",
     "istanbul": "0.4.2",
     "mocha": "2.4.5",
