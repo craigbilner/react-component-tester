@@ -2,7 +2,8 @@
   "extends": "airbnb",
   "rules": {
     "func-names": 0,
-    "prefer-rest-params": 0
+    "prefer-rest-params": 0,
+    "no-underscore-dangle": 0
   },
   "globals": {
     "describe": true,

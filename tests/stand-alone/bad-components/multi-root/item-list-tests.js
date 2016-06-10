@@ -21,6 +21,6 @@ describe('the ItemListComponent should', () => {
       });
     };
 
-    assert.throws(errorFunc, /a react component must return one root element/);
+    assert.throws(errorFunc, /a valid React element \(or null\) must be returned/i);
   });
 });

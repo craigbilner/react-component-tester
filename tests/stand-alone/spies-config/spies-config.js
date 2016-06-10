@@ -9,7 +9,7 @@ export default class SpiesConfig extends Component {
   render() {
     return (
       <div>
-        { this.spiedOn() }
+        {this.spiedOn()}
       </div>
     );
   }

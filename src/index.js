@@ -255,16 +255,8 @@ const getShallowRenderer = function (component, props) {
     componentWithProps.type.contextTypes._radiumConfig = context._radiumConfig;
   }
 
-  try {
-    shallowRenderer
-      .render(componentWithProps, context);
-  } catch (ex) {
-    if (ex.message === 'inst.render is not a function') {
-      throw new Error('a react component must return one root element');
-    } else {
-      throw ex;
-    }
-  }
+  shallowRenderer
+    .render(componentWithProps, context);
 
   return shallowRenderer;
 };
