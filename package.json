@@ -47,7 +47,7 @@
     "eslint-config-airbnb": "9.0.1",
     "eslint-plugin-react": "5.1.1",
     "istanbul": "0.4.3",
-    "mocha": "2.4.5",
+    "mocha": "2.5.3",
     "radium": "0.17.1",
     "react-dom": "0.14.7",
     "webpack": "1.13.1"
