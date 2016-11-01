@@ -59,6 +59,6 @@
     "react": "15.3.1",
     "react-addons-test-utils": "15.3.1",
     "sinon": "1.17.5",
-    "stampit": "2.1.2"
+    "stampit": "3.0.6"
   }
 }
