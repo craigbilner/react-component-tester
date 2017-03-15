@@ -58,7 +58,7 @@
     "lodash": "4.15.0",
     "react": "15.3.1",
     "react-addons-test-utils": "15.3.1",
-    "sinon": "1.17.5",
+    "sinon": "2.0.0",
     "stampit": "2.1.2"
   }
 }
