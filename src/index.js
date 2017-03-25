@@ -47,13 +47,15 @@ const flavourComponentMethods = {
 };
 
 const flavourComponentInit = function (opts) {
+  Object.assign(this, opts);
+
   this.mapTestArgs = [];
 
-  if (opts.instance.props) {
-    this.style = opts.instance.props.style;
+  if (opts.props) {
+    this.style = opts.props.style;
 
-    if (!TestUtils.isElement(opts.instance.props.children)) {
-      this.value = opts.instance.props.children;
+    if (!TestUtils.isElement(opts.props.children)) {
+      this.value = opts.props.children;
     }
   }
 };
@@ -122,15 +124,17 @@ const reduceTypes = function (childMap, typeMap, key) {
 };
 
 const flavourInit = function (opts) {
-  const output = opts.instance.shallowRenderer.getRenderOutput();
+  Object.assign(this, opts);
 
-  this.initialState = _.assign({}, opts.instance.shallowRenderer._instance._instance.state);
+  const output = opts.shallowRenderer.getRenderOutput();
+
+  this.initialState = _.assign({}, opts.shallowRenderer._instance._instance.state);
   this.state = _.assign({}, this.initialState);
   this.component = flavourComponent(_.assign(
     {},
     output,
     {
-      reactClass: opts.instance.reactClass,
+      reactClass: opts.reactClass,
     }
   ));
 
@@ -138,7 +142,7 @@ const flavourInit = function (opts) {
     this.type = output.type;
     this.childMap = convertAndReduce(
       this.component,
-      opts.instance.reactClass,
+      opts.reactClass,
       output.props.children
     );
   } else {
@@ -194,11 +198,13 @@ const flavour = stampit()
 
 // INIT
 const testerInit = function (opts) {
+  Object.assign(this, opts);
+
   this.ComponentToUse = null;
 
   this.config = {
-    spyOnDefault: opts.instance.spyOnDefault,
-    spyOn: opts.instance.spyOn,
+    spyOnDefault: opts.spyOnDefault,
+    spyOn: opts.spyOn,
   };
 };
 
