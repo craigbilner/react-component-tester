@@ -6,6 +6,8 @@
 
 # react component tester
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/craigbilner/react-component-tester.svg)](https://greenkeeper.io/)
+
 because testing components with shallow rendering is fantastic...but can be a bit of a pain and other testing libraries focus on finding components rather than providing an opinionated way of testing them, including their state.
 
 # requirements
