@@ -82,8 +82,7 @@ const reduceChildren =
         {
           parentComponent,
           reactClass,
-        }
-      ));
+        }));
 
       _.assign(
         thisMap,
@@ -91,9 +90,7 @@ const reduceChildren =
           parentComponent,
           reactClass,
           child.props.children,
-          id
-        )
-      );
+          id));
     } else {
       thisMap[id] = {
         value: child,
@@ -110,8 +107,7 @@ const convertAndReduce = function (parentComponent, reactClass, children, parent
     .toArray(children)
     .reduce(
       reduceChildren.bind(null, parentComponent, reactClass, parentIndx),
-      {}
-    );
+      {});
 };
 
 const reduceTypes = function (childMap, typeMap, key) {
@@ -135,16 +131,14 @@ const flavourInit = function (opts) {
     output,
     {
       reactClass: opts.reactClass,
-    }
-  ));
+    }));
 
   if (output) {
     this.type = output.type;
     this.childMap = convertAndReduce(
       this.component,
       opts.reactClass,
-      output.props.children
-    );
+      output.props.children);
   } else {
     this.type = output;
     this.childMap = [];
@@ -155,8 +149,7 @@ const flavourInit = function (opts) {
       .keys(this.childMap)
       .reduce(
         reduceTypes.bind(null, this.childMap),
-        new Map()
-      );
+        new Map());
 
   // console.log('childMap', this.childMap);
   // console.log('typeMap', this.typeMap);
@@ -222,10 +215,9 @@ const use = function (Component) {
     this.config,
     {
       spyOn: doNotSpyOn,
-    }
-  );
+    });
 
-  Object.getOwnPropertyNames(Component.prototype).forEach(method => {
+  Object.getOwnPropertyNames(Component.prototype).forEach((method) => {
     if (options.spyOn[method] === false) return;
 
     if (options.spyOnDefault || options.spyOn[method]) {
@@ -271,14 +263,13 @@ const addFlavour = function (name, props) {
   return createFlavour(
     name,
     this.ComponentToUse,
-    getShallowRenderer(this.ComponentToUse, props)
-  );
+    getShallowRenderer(this.ComponentToUse, props));
 };
 
 const teardown = function () {
   const proto = this.ComponentToUse.prototype;
 
-  Object.getOwnPropertyNames(proto).forEach(method => {
+  Object.getOwnPropertyNames(proto).forEach((method) => {
     restoreSpy(proto[method]);
   });
 

@@ -1,3 +1,10 @@
-machine:
-  node:
-    version: 5.4.0
+dependencies: 
+  cache_directories: 
+    - ~/.cache/yarn
+  override: 
+    - yarn
+machine: 
+  environment: 
+    PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
+  node: 
+    version: "6.10.0"
